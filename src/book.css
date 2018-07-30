@@ -185,6 +185,7 @@ Table of Contents
 	-webkit-transform: rotateY(-15deg) translateZ(-8px);
 	-moz-transform: rotateY(-15deg) translateZ(-8px);
 	transform: rotateY(-15deg) translateZ(-8px);
+	box-shadow: 10px 10px 20px 5px #454749;
 }
 
 .page li:nth-child(1) {
@@ -317,12 +318,6 @@ Table of Contents
 	transform: rotateY(90deg) translateZ(158px) translateX(2px);
 }
 
-.hardcover_front li:last-child:after,
-.hardcover_front li:last-child:before {
-	width: 4px;
-	height: 160px;
-}
-
 .hardcover_front li:last-child:after {
 	margin-top: -40px;
 	-webkit-transform: rotateX(90deg) rotateZ(90deg) translateZ(80px) translateX(-2px) translateY(-78px);
@@ -354,13 +349,6 @@ Table of Contents
 	-webkit-transform: rotateY(90deg) translateZ(158px) translateX(2px);
 	-moz-transform: rotateY(90deg) translateZ(158px) translateX(2px);
 	transform: rotateY(90deg) translateZ(158px) translateX(2px);
-}
-
-.hardcover_back li:last-child:after,
-.hardcover_back li:last-child:before {
-	margin-top: -40px;
-	width: 4px;
-	height: 160px;
 }
 
 .hardcover_back li:last-child:after {
@@ -671,7 +659,7 @@ figcaption {
 	padding-left: 40px;
 	text-align: left;
 	position: absolute;
-	top: 0%;
+	top: 5%;
 	left: 130px;
 	width: 250px;
 	-webkit-backface-visibility: hidden;
