@@ -43,17 +43,14 @@ a {
 }
 
 .btn {
-	border: 1px solid #11846e;
-	border-radius: 10px;
 	display: inline-block;
 	text-transform: uppercase;
-	color: #dce2ea;
-	margin-bottom: 10px;
+	border: 2px solid #2c3e50;
+	margin-top: 100px; 
 	font-size: 0.7em;
-	padding: 3px;
+	font-weight: 700;
+	padding: 0.1em 0.4em;
 	text-align: center;
-	background-color: #11846e;
-	vertical-align: middle;
 	-webkit-transition: color 0.3s, border-color 0.3s;
 	-moz-transition: color 0.3s, border-color 0.3s;
 	transition: color 0.3s, border-color 0.3s;
@@ -62,7 +59,6 @@ a {
 .btn:hover {
 	border-color: #16a085;
 	color: #16a085;
-	background-color: rgba(50, 50, 50, 0);
 }
 
 /* basic grid, only for this demo */
@@ -154,6 +150,20 @@ Table of Contents
 
 /* thickness of cover */
 
+.hardcover_front li:first-child:after,
+.hardcover_front li:first-child:before,
+.hardcover_front li:last-child:after,
+.hardcover_front li:last-child:before,
+.hardcover_back li:first-child:after,
+.hardcover_back li:first-child:before,
+.hardcover_back li:last-child:after,
+.hardcover_back li:last-child:before,
+.book_spine li:first-child:after,
+.book_spine li:first-child:before,
+.book_spine li:last-child:after,
+.book_spine li:last-child:before {
+	background: #999;
+}
 
 /* page */
 
@@ -161,7 +171,7 @@ Table of Contents
 	background: -webkit-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
 	background: -moz-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
 	background: -ms-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
-	background: linear-gradient(to left, #e1ddd8 0%, #fffbf6 100%);
+	background: linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
 	box-shadow: inset 0px -1px 2px rgba(50, 50, 50, 0.1), inset -1px 0px 1px rgba(150, 150, 150, 0.2);
 	border-radius: 0px 5px 5px 0px;
 }
@@ -171,8 +181,6 @@ Table of Contents
 */
 
 .hardcover_front {
-	width: 85% !important;
-	height: 77% !important;
 	-webkit-transform: rotateY(-34deg) translateZ(8px);
 	-moz-transform: rotateY(-34deg) translateZ(8px);
 	transform: rotateY(-34deg) translateZ(8px);
@@ -180,8 +188,6 @@ Table of Contents
 }
 
 .hardcover_back {
-	width: 79% !important;
-	height: 77% !important;
 	-webkit-transform: rotateY(-15deg) translateZ(-8px);
 	-moz-transform: rotateY(-15deg) translateZ(-8px);
 	transform: rotateY(-15deg) translateZ(-8px);
@@ -292,7 +298,7 @@ Table of Contents
 .book_spine li:first-child:after,
 .book_spine li:first-child:before,
 .book_spine li:last-child:after,
-.book_spine li:last-child:before {;
+.book_spine li:last-child:before {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -324,13 +330,11 @@ Table of Contents
 }
 
 .hardcover_front li:last-child:after {
-	margin-top: -40px;
 	-webkit-transform: rotateX(90deg) rotateZ(90deg) translateZ(80px) translateX(-2px) translateY(-78px);
 	-moz-transform: rotateX(90deg) rotateZ(90deg) translateZ(80px) translateX(-2px) translateY(-78px);
 	transform: rotateX(90deg) rotateZ(90deg) translateZ(80px) translateX(-2px) translateY(-78px);
 }
 .hardcover_front li:last-child:before {
-	margin-top: -40px;
 	box-shadow: 0px 0px 30px 5px #333;
 	-webkit-transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(-2px) translateY(-78px);
 	-moz-transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(-2px) translateY(-78px);
@@ -358,7 +362,6 @@ Table of Contents
 
 .hardcover_back li:last-child:after,
 .hardcover_back li:last-child:before {
-	margin-top: -40px;
 	width: 4px;
 	height: 160px;
 }
@@ -371,7 +374,7 @@ Table of Contents
 
 .hardcover_back li:last-child:before {
 	box-shadow: 10px -1px 80px 20px #666;
-	-webkit-transform: rotateX(90deg) rotfateZ(90deg) translateZ(-140px) translateX(2px) translateY(-78px);
+	-webkit-transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(2px) translateY(-78px);
 	-moz-transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(2px) translateY(-78px);
 	transform: rotateX(90deg) rotateZ(90deg) translateZ(-140px) translateX(2px) translateY(-78px);
 }
@@ -382,7 +385,6 @@ Table of Contents
 	-moz-transform: rotateY(60deg) translateX(-5px) translateZ(-12px);
 	transform: rotateY(60deg) translateX(-5px) translateZ(-12px);
 	width: 16px;
-	height: 169px;
 	z-index: 0;
 }
 
@@ -447,8 +449,8 @@ Table of Contents
 }
 
 .page {
-	width: 80%;
-	height: 75%;
+	width: 100%;
+	height: 98%;
 	top: 1%;
 	left: 3%;
 	z-index: 10;
@@ -604,21 +606,21 @@ Table of Contents
 	background-color: #f1c40f;
 	background-image: -webkit-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
 	background-image: -moz-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-	background-image: linear-gradient(to top, #f1c40f 58%, #e7ba07 0%);
+	background-image: linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
 }
 
 .blue {
 	background-color: #3498db;
 	background-image: -webkit-linear-gradient(top, #3498db 58%, #2a90d4 0%);
 	background-image: -moz-linear-gradient(top, #3498db 58%, #2a90d4 0%);
-	background-image: linear-gradient(to top, #3498db 58%, #2a90d4 0%);
+	background-image: linear-gradient(top, #3498db 58%, #2a90d4 0%);
 }
 
 .grey {
 	background-color: #f8e9d1;
 	background-image: -webkit-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
 	background-image: -moz-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-	background-image: linear-gradient(to top, #f8e9d1 58%, #e7d5b7 0%);
+	background-image: linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
 }
 
 /* Basic ribbon */
@@ -672,8 +674,8 @@ figcaption {
 	text-align: left;
 	position: absolute;
 	top: 0%;
-	left: 130px;
-	width: 250px;
+	left: 160px;
+	width: 310px;
 	-webkit-backface-visibility: hidden;
 }
 

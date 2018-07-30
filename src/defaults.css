@@ -1,0 +1,14 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.border {
+	border: 1px solid black !important;
+}
+
+.hide-extra-text {
+	overflow: hidden;
+}
