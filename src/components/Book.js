@@ -38,6 +38,12 @@ class Book extends React.Component {
 					<li></li>
 					<li></li>
 				</ul>
+				<br/><br/><br/><br/>
+				<figcaption>
+					<h3>CSS Ninja</h3>
+					<span>By Marco Barría for Codrops</span>
+					<p>{this.props.shelf}</p>
+				</figcaption>
 			</figure>
 	    )
 	}

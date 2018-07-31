@@ -55,7 +55,7 @@ class Shelf extends React.Component {
 					<GridLayout 
 						className="layout" 
 						cols={12} 
-						rowHeight={220} 
+						rowHeight={275} 
 						width={1200} 
 						layout={this.generateLayout()}
 						isResizable={true}>
