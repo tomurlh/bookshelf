@@ -22,11 +22,27 @@ class Book extends React.Component {
 					<li>
 						<br/><br/>
 						<div>
-							<a className="btn" href="/">Want to Read <ScheduleIcon style={iconStyle} /></a>
+							<button 
+								className="btn" type="button"
+								onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
+								Want to Read <ScheduleIcon style={iconStyle} />
+							</button>
+							
 							<br/>
-							<a className="btn" href="/">Reading <DoneIcon style={iconStyle} /></a>
+							
+							<button 
+								className="btn" type="button"
+								onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
+								Reading <DoneIcon style={iconStyle} />
+							</button>
+
 							<br/>
-							<a className="btn" href="/">Read <DoneAllIcon style={iconStyle} /></a>
+
+							<button 
+								className="btn" type="button"
+								onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
+								Read <DoneAllIcon style={iconStyle} />
+							</button>
 						</div>
 					</li>
 					<li></li>
@@ -40,9 +56,8 @@ class Book extends React.Component {
 				</ul>
 				<br/><br/><br/><br/>
 				<figcaption>
-					<h3>CSS Ninja</h3>
-					<span>By Marco Barría for Codrops</span>
-					<p>{this.props.shelf}</p>
+					<h4>{this.props.title}</h4>
+					<span>{this.props.authors}</span>
 				</figcaption>
 			</figure>
 	    )
