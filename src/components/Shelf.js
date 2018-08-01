@@ -6,6 +6,8 @@ import 'react-resizable/css/styles.css'
 
 import GridLayout from 'react-grid-layout'
 import Grid from '@material-ui/core/Grid'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
 import Book from './Book'
 
@@ -31,12 +33,15 @@ class Shelf extends React.Component {
 			<div>
 				<Grid container spacing={24}>
 					<Grid item xs={12}>
-						<h3>{this.props.title}</h3>
-						<hr/><br/>
+						<Typography variant="title" color="inherit">
+						{this.props.title}
+						</Typography>
+						<Divider />
+						<br/>
 						<GridLayout 
 							className="layout" 
 							cols={12} 
-							rowHeight={275} 
+							rowHeight={350} 
 							width={1200} 
 							layout={this.generateLayout(this.props.books)}
 							isResizable={false}>

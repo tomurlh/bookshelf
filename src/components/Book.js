@@ -84,7 +84,7 @@ Book.propTypes = {
 	title: PropTypes.string,
 	authors: PropTypes.array,
 	shelf: PropTypes.string.isRequired,
-	moveBook: PropTypes.func.isRequired,
+	moveBook: PropTypes.func,
 	description: PropTypes.string,
 }
 
