@@ -67,3 +67,9 @@
   background-size: 28px;
   font-size: 0;
 }
+
+.small-font {
+  font-size: 10px !important;
+  margin-top: 5px !important;
+  padding: 4px 8px !important;
+}

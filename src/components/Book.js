@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import DoneIcon from '@material-ui/icons/Done'
 import DoneAllIcon from '@material-ui/icons/DoneAll'
+import ClearIcon from '@material-ui/icons/Clear'
 import '../book.css'
 
 class Book extends React.Component {
@@ -21,29 +23,38 @@ class Book extends React.Component {
 				<ul className='page'>
 					<li></li>
 					<li>
-						<br/><br/>
 						<div>
-							<button 
-								className="btn" type="button"
-								onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
-								Want to Read <ScheduleIcon style={iconStyle} />
-							</button>
-							
-							<br/>
-							
-							<button 
-								className="btn" type="button"
-								onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
-								Reading <DoneIcon style={iconStyle} />
-							</button>
+							<center>
+								<Button
+									className="btn small-font"
+									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
+									Want to Read <ScheduleIcon style={iconStyle} />
+								</Button>
+								
+								<br/>
+								
+								<Button 
+									className="btn small-font"
+									onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
+									Reading <DoneIcon style={iconStyle} />
+								</Button>
 
-							<br/>
+								<br/>
 
-							<button 
-								className="btn" type="button"
-								onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
-								Read <DoneAllIcon style={iconStyle} />
-							</button>
+								<Button 
+									className="btn small-font"
+									onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
+									Read <DoneAllIcon style={iconStyle} />
+								</Button>
+
+								<br/>
+
+								<Button 
+									className="btn small-font"
+									onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
+									None <ClearIcon style={iconStyle} />
+								</Button>
+							</center>
 						</div>
 					</li>
 					<li></li>
