@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import DoneIcon from '@material-ui/icons/Done'
 import DoneAllIcon from '@material-ui/icons/DoneAll'
@@ -63,10 +64,22 @@ class Book extends React.Component {
 	    )
 	}
 
-
-
-	componentDidMount() {
-	}
+	fadeOut
 }
 
+Book.propTypes = {
+	id: PropTypes.string.isRequired,
+	cover: PropTypes.string.isRequired,
+	title: PropTypes.string,
+	authors: PropTypes.array,
+	shelf: PropTypes.string.isRequired,
+	moveBook: PropTypes.func.isRequired,
+	description: PropTypes.string,
+}
+
+Book.defaultProps = {
+	id: '',
+	shelf: '',
+	cover: ''
+}
 export default Book

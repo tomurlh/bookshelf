@@ -36,10 +36,12 @@ class Home extends React.Component {
 
 	moveBook = (id, shelf) => {
 		BooksAPI.update({id}, shelf).then((response) => {
-			this.setState({
-				wantToRead: response.wantToRead,
-				currentlyReading: response.currentlyReading,
-				read: response.read
+			BooksAPI.getAll().then((response) => {
+				this.setState({
+					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
+					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
+					read: response.filter((book) => book.shelf === 'read'),
+				})
 			})
 		})
 	}
@@ -49,10 +51,8 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<Shelf name="Want To Read" books={this.state.wantToRead} title={'Want To Read'} moveBook={this.moveBook} />
-				<br/>
-				<Shelf name="Reading" books={this.state.currentlyReading} title={'Currently Reading'} moveBook={this.moveBook} />
-				<br/>
+				<Shelf name="Want To Read" books={this.state.wantToRead} title={'Want To Read'} moveBook={this.moveBook} /><br/>
+				<Shelf name="Reading" books={this.state.currentlyReading} title={'Currently Reading'} moveBook={this.moveBook} /><br/>
 				<Shelf name="Read" books={this.state.read} title={'Read'} moveBook={this.moveBook} />
 
 				<Link to="/search">

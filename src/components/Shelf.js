@@ -39,7 +39,7 @@ class Shelf extends React.Component {
 							rowHeight={275} 
 							width={1200} 
 							layout={this.generateLayout(this.props.books)}
-							isResizable={true}>
+							isResizable={false}>
 							{this.props.books.map((book) => 
 							 	<div key={book.id}>
 									<Book
