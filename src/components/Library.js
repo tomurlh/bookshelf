@@ -89,7 +89,12 @@ class Library extends React.Component {
 				<Shelf name="Reading" books={this.state.currentlyReading} title={'Currently Reading'} moveBook={this.moveBook} whichShelf={this.whichShelf} /><br/>
 				<Shelf name="Read" books={this.state.read} title={'Read'} moveBook={this.moveBook} whichShelf={this.whichShelf} />
 
-				<Link to={{ pathname: '/search', params: {moveBook: this.moveBook, whichShelf: this.whichShelf} }}>
+				<Link to={{ 
+					pathname: '/search', 
+					state: {
+						str: 'this'
+					} 
+				}}>
 					<Tooltip title="Add new book">
 						<Button variant="fab" color="primary" aria-label="Add" className="open-search">
 							<AddIcon />

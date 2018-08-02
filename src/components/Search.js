@@ -55,16 +55,17 @@ class Search extends React.Component {
 	}, 1500)
 
 	componentDidMount() {
-		this.setState({
-			moveBook: this.props.location.params.moveBook,
-			whichShelf: this.props.location.params.whichShelf,
-		})
+		console.log(this.props.location.state)
+		// this.setState({
+		// 	moveBook: this.props.location.params.moveBook,
+		// 	whichShelf: this.props.location.params.whichShelf,
+		// })
 	}
 
-	componentWillUmount() {
-		this.state.moveBook.cancel()
-		this.props.whichShelf.cancel()
-	}
+	// componentWillUmount() {
+	// 	this.state.moveBook.cancel()
+	// 	this.props.whichShelf.cancel()
+	// }
 }
 
 export default Search

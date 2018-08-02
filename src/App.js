@@ -3,7 +3,6 @@ import './App.css'
 
 import Search from './components/Search'
 import Library from './components/Library'
-
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
