@@ -5,6 +5,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GridLayout from 'react-grid-layout'
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
@@ -31,31 +32,35 @@ class Shelf extends React.Component {
 	render() {
 		return (
 			<div>
-				<Grid container spacing={24}>
-					<Grid item xs={12}>
-						<Typography variant="title" color="inherit">
-						{this.props.title}
-						</Typography>
-						<Divider />
-						<br/>
-						<GridLayout 
-							className="layout" 
-							cols={12} 
-							rowHeight={350} 
-							width={1200} 
-							layout={this.generateLayout(this.props.books)}
-							isResizable={false}>
-							{this.props.books.map((book) => 
-							 	<div key={book.id}>
-									<Book
-										cover={book.imageLinks.smallThumbnail} id={book.id}
-										title={book.title} authors={book.authors} shelf={book.shelf}
-										moveBook={this.props.moveBook} description={book.description} />
-								</div>
-							)}
-						</GridLayout>
+				<Paper style={{ marginLeft: '20px', marginRight: '20px' }}>
+					<Grid container spacing={24}>
+						<Grid item xs={12} style={{ marginLeft: '10px', marginRight: '10px' }}>
+							<Typography variant="title" color="inherit">
+							{this.props.title}
+							</Typography>
+							<Divider />
+							<br/>
+							<GridLayout
+								className="layout"
+								cols={12}
+								rowHeight={350}
+								width={1200}
+								layout={this.generateLayout(this.props.books)}
+								isResizable={false}>
+								{this.props.books.map((book) =>
+								 	<div key={book.id}>
+										<Book
+											cover={book.imageLinks} id={book.id}
+											title={book.title} authors={book.authors} shelf={book.shelf}
+											moveBook={this.props.moveBook} whichShelf={this.props.whichShelf}
+											description={book.description} />
+									</div>
+								)}
+							</GridLayout>
+						</Grid>
 					</Grid>
-				</Grid>
+				</Paper>
+				<br/><br/>
 			</div>
 		)
 	}

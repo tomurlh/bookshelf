@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 
 import Search from './components/Search'
-import Home from './components/Home'
+import Library from './components/Library'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" exact render={() => <Home />} />
+          <Route path="/" exact render={() => <Library />} />
           <Route path="/search" component={Search} />
         </div>
       </Router>

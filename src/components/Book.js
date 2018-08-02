@@ -9,13 +9,21 @@ import '../book.css'
 
 class Book extends React.Component {
 
+	selectedStyle = (shelf) => {
+		if(shelf === this.props.whichShelf(this.props.id)) {
+			return {backgroundColor: 'rgba(0,0,0,0.19)'}
+		}
+		else return {}
+	}
+
 	render() {
 		let iconStyle = { fontSize: 15, verticalAlign: 'middle' }
+		let image = this.props.cover.smallThumbnail
 	    return (
 			<figure className='book'>
 				<ul className='hardcover_front'>
 					<li>
-						<img src={this.props.cover} alt="" width="100%" height="100%"/>
+						<img src={image} alt="not available" width="100%" height="100%"/>
 					</li>
 					<li></li>
 				</ul>
@@ -26,31 +34,31 @@ class Book extends React.Component {
 						<div>
 							<center>
 								<Button
-									className="btn small-font"
+									className="btn small-font" style={this.selectedStyle('wantToRead')}
 									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
 									Want to Read <ScheduleIcon style={iconStyle} />
 								</Button>
-								
+
 								<br/>
-								
-								<Button 
-									className="btn small-font"
+
+								<Button
+									className="btn small-font" style={this.selectedStyle('currentlyReading')}
 									onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
 									Reading <DoneIcon style={iconStyle} />
 								</Button>
 
 								<br/>
 
-								<Button 
-									className="btn small-font"
+								<Button
+									className="btn small-font" style={this.selectedStyle('read')}
 									onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
 									Read <DoneAllIcon style={iconStyle} />
 								</Button>
 
 								<br/>
 
-								<Button 
-									className="btn small-font"
+								<Button
+									className="btn small-font" style={this.selectedStyle('none')}
 									onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
 									None <ClearIcon style={iconStyle} />
 								</Button>
@@ -74,23 +82,23 @@ class Book extends React.Component {
 			</figure>
 	    )
 	}
-
-	fadeOut
 }
 
 Book.propTypes = {
 	id: PropTypes.string.isRequired,
-	cover: PropTypes.string.isRequired,
+	cover: PropTypes.object.isRequired,
 	title: PropTypes.string,
 	authors: PropTypes.array,
 	shelf: PropTypes.string.isRequired,
 	moveBook: PropTypes.func,
+	whichShelf: PropTypes.func,
 	description: PropTypes.string,
 }
 
 Book.defaultProps = {
 	id: '',
 	shelf: '',
-	cover: ''
+	cover: {}
 }
+
 export default Book
