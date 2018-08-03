@@ -14,6 +14,7 @@ import Book from './Book'
 
 class Shelf extends React.Component {
 
+	// Methods that generate the layout of the Grid, accoding to number of books of the shelf
 	generateLayout(books) {
 		const p = this.props
 		return books.map((book, i) => {
@@ -36,10 +37,12 @@ class Shelf extends React.Component {
 					<Grid container spacing={24}>
 						<Grid item xs={12} style={{ marginLeft: '10px', marginRight: '10px' }}>
 							<Typography variant="title" color="inherit">
-							{this.props.title}
+								{this.props.title}
 							</Typography>
+
 							<Divider />
 							<br/>
+
 							<GridLayout
 								className="layout"
 								cols={12}

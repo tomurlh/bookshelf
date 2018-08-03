@@ -2,14 +2,13 @@ import React from 'react'
 import { debounce } from 'lodash'
 import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
+import swal from 'sweetalert2'
 import * as BooksAPI from '../utils/BooksAPI'
 
 class Search extends React.Component {
 	state = {
-		text: '',
+		queryText: '',
 		books: [],
-		moveBook: null,
-		whichShelf: null,
 	}
 
 	render() {
@@ -30,42 +29,42 @@ class Search extends React.Component {
 						name="Queried Books"
 						books={this.state.books}
 						title={'Queried Books'}
-						moveBook={this.state.moveBook}
-						whichShelf={this.state.whichShelf} />
+						moveBook={this.props.moveBook}
+						whichShelf={this.props.whichShelf} />
 				</div>
 			</div>
 		)
 	}
 
 
-
-	queryBooks = debounce((text) => {
-		if(!text) {
+	// Query performed with debounce from Lodash
+	queryBooks = debounce((queryText) => {
+		if(!queryText) {
 			this.setState({ books: [] })
 			return
 		}
 
-		BooksAPI.search(text).then((response) => {
+		BooksAPI.search(queryText).then((response) => {
 			if(response.error) {
 				this.setState({ books: [] })
+				// Alert message
+				const toast = swal.mixin({
+					toast: true, position: 'top-end',
+					showConfirmButton: false, timer: 3000
+				})
+				toast({ type: 'error', title: 'props.title' })
+
 				return
 			}
 			this.setState({ books: response })
+			// Alert message
+			const toast = swal.mixin({
+				toast: true, position: 'top-end',
+				showConfirmButton: false, timer: 3000
+			})
+			toast({ type: 'success', title: 'Research completed' })
 		})
 	}, 1500)
-
-	componentDidMount() {
-		console.log(this.props.location.state)
-		// this.setState({
-		// 	moveBook: this.props.location.params.moveBook,
-		// 	whichShelf: this.props.location.params.whichShelf,
-		// })
-	}
-
-	// componentWillUmount() {
-	// 	this.state.moveBook.cancel()
-	// 	this.props.whichShelf.cancel()
-	// }
 }
 
 export default Search
