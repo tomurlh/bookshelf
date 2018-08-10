@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import BookIcon from '@material-ui/icons/Book'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import BookmarksIcon from '@material-ui/icons/Bookmarks'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -32,31 +33,20 @@ class Library extends React.Component {
 				</Typography>
 				<br/>
 
-				<Shelf 
-					name="wantToRead" 
-					books={this.props.getState().wantToRead} 
-					title={'Want To Read'} 
-					moveBook={this.props.moveBook} 
-					whichShelf={this.props.whichShelf}
-					clearShelf={this.props.clearShelf} />
-				<br/>
-				
-				<Shelf 
-				name="currentlyReading" 
-				books={this.props.getState().currentlyReading} 
-				title={'Currently Reading'} 
-				moveBook={this.props.moveBook} 
-				whichShelf={this.props.whichShelf}
-				clearShelf={this.props.clearShelf} />
-				<br/>
-				
-				<Shelf 
-				name="read" 
-				books={this.props.getState().read} 
-				title={'Read'} 
-				moveBook={this.props.moveBook} 
-				whichShelf={this.props.whichShelf}
-				clearShelf={this.props.clearShelf} />
+				{Object.getOwnPropertyNames(this.props.getState()).map((shelf) => {
+					let books = this.props.getState()[shelf];
+					let shelfNames = Object.getOwnPropertyNames(this.props.getState())
+
+					return <Shelf
+							key={shelf}
+							name={shelf}
+							books={books}
+							title={shelf}
+							actionNames={shelfNames}
+							moveBook={this.props.moveBook} 
+							whichShelf={this.props.whichShelf}
+							clearShelf={this.props.clearShelf} />
+				})}
 
 				<Link to={{
 					pathname: '/search',

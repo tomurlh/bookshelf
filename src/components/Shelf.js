@@ -66,7 +66,7 @@ class Shelf extends React.Component {
 								{this.props.books.map((book) =>
 								 	<div key={book.id}>
 										<Book
-											cover={book.imageLinks} id={book.id}
+											cover={book.imageLinks} id={book.id} actionNames={this.props.actionNames}
 											title={book.title} authors={book.authors} shelf={book.shelf}
 											moveBook={this.props.moveBook} whichShelf={this.props.whichShelf}
 											description={book.description} />

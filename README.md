@@ -15,7 +15,7 @@ Application from the Nanodegree program of React from Udacity.
 
 The app comes with 3 predefined shelfs:
 
-- Want To Read:
+- Want To Read;
 - Currently Reading;
 - Read;
 

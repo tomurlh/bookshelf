@@ -39,6 +39,13 @@ class App extends Component {
 		})
 	}
 
+
+
+	addShelf = (name) => {
+		this.setState({ name })
+	}
+
+
 	// Return the name of shelf of the book
 	// used to mark as selected the shelf of the book in the book options
 	whichShelf = (id) => {

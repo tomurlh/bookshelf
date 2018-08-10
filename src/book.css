@@ -516,9 +516,9 @@ Table of Contents
 }
 
 .book:hover > .page li:nth-child(3) {
-	-webkit-transform: rotateY(-118deg);
-	-moz-transform: rotateY(-118deg);
-	transform: rotateY(-118deg);
+	-webkit-transform: rotateY(-128deg);
+	-moz-transform: rotateY(-128deg);
+	transform: rotateY(-128deg);
 	-webkit-transition-duration: 1.6s;
 	-moz-transition-duration: 1.6s;
 	transition-duration: 1.6s;
