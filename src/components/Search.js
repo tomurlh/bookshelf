@@ -52,7 +52,7 @@ class Search extends React.Component {
 					toast: true, position: 'top-end',
 					showConfirmButton: false, timer: 3000
 				})
-				toast({ type: 'error', title: 'props.title' })
+				toast({ type: 'error', title: 'the search did not match any books' })
 
 				return
 			}
