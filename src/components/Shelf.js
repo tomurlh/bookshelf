@@ -8,6 +8,8 @@ import GridLayout from 'react-grid-layout'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline'
 import Typography from '@material-ui/core/Typography'
 
 import Book from './Book'
@@ -33,13 +35,24 @@ class Shelf extends React.Component {
 	render() {
 		return (
 			<div>
-				<Paper style={{ marginLeft: '20px', marginRight: '20px' }}>
+				<Paper className="paper-adjust">
 					<Grid container spacing={24}>
-						<Grid item xs={12} style={{ marginLeft: '10px', marginRight: '10px' }}>
-							<Typography variant="title" color="inherit">
-								{this.props.title}
+						<Grid item xs={12} className="grid-adjust">
+							<Typography>
+								<span color="inherit" className="shelf-title-adjust">
+									{this.props.title}
+								</span>
+								{this.props.clearShelf !== undefined &&
+									<span className="shelf-action">
+										<Button
+											variant="contained" color="primary" size="small"
+											className="small-font clear-shelf-btn"
+											onClick={() => {this.props.clearShelf(this.props.name)}}>
+											Clear Shelf <RemoveCircleIcon style={{ fontSize: 15, verticalAlign: 'middle' }} />
+										</Button>
+									</span>
+								}
 							</Typography>
-
 							<Divider />
 							<br/>
 
@@ -60,6 +73,16 @@ class Shelf extends React.Component {
 									</div>
 								)}
 							</GridLayout>
+							{this.props.books.length <= 0 &&
+								<Typography variant="caption" gutterBottom align="center">
+									{this.props.whenEmpty}
+								</Typography>
+							}
+							{this.props.books.length > 0 &&
+								<Typography variant="caption" gutterBottom align="center">
+									This shelf has {this.props.books.length} book(s)
+								</Typography>
+							}
 						</Grid>
 					</Grid>
 				</Paper>
@@ -67,6 +90,10 @@ class Shelf extends React.Component {
 			</div>
 		)
 	}
+}
+
+Shelf.defaultProps = {
+	whenEmpty: 'This shelf is empty'
 }
 
 export default Shelf

@@ -32,9 +32,31 @@ class Library extends React.Component {
 				</Typography>
 				<br/>
 
-				<Shelf name="Want To Read" books={this.props.getState().wantToRead} title={'Want To Read'} moveBook={this.props.moveBook} whichShelf={this.props.whichShelf} /><br/>
-				<Shelf name="Reading" books={this.props.getState().currentlyReading} title={'Currently Reading'} moveBook={this.props.moveBook} whichShelf={this.props.whichShelf} /><br/>
-				<Shelf name="Read" books={this.props.getState().read} title={'Read'} moveBook={this.props.moveBook} whichShelf={this.props.whichShelf} />
+				<Shelf 
+					name="wantToRead" 
+					books={this.props.getState().wantToRead} 
+					title={'Want To Read'} 
+					moveBook={this.props.moveBook} 
+					whichShelf={this.props.whichShelf}
+					clearShelf={this.props.clearShelf} />
+				<br/>
+				
+				<Shelf 
+				name="currentlyReading" 
+				books={this.props.getState().currentlyReading} 
+				title={'Currently Reading'} 
+				moveBook={this.props.moveBook} 
+				whichShelf={this.props.whichShelf}
+				clearShelf={this.props.clearShelf} />
+				<br/>
+				
+				<Shelf 
+				name="read" 
+				books={this.props.getState().read} 
+				title={'Read'} 
+				moveBook={this.props.moveBook} 
+				whichShelf={this.props.whichShelf}
+				clearShelf={this.props.clearShelf} />
 
 				<Link to={{
 					pathname: '/search',
