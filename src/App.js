@@ -7,6 +7,7 @@ import Library from './components/Library'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
+	// the state is shared through the workflow: App -> Library -> Shelf -> Book
 	state = {
 		wantToRead: [],
 		currentlyReading: [],
