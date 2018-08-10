@@ -19,9 +19,9 @@ The app comes with 3 predefined shelfs:
 - Currently Reading;
 - Read;
 
-In the app you can add more shelves as you wish (e.g.: a new shelf with books of sports).
+<!-- In the app you can add more shelves as you wish (e.g.: a new shelf with books of sports).
 You can clear the shelf too with a button in the top right corner.
-
+ -->
 
 ## Books
 
@@ -42,7 +42,7 @@ This app is pretty simple and have just 4 components besides de App:
 
 The state of this app is shared through the components that needs to add books (Search) or change the shelf of some book (Shelf), so the workflow of the state is:
 
-`App contains the state`
+App contains the state
 
 `App -> Library -> Shelf -> Book`
 
