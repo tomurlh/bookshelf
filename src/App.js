@@ -14,9 +14,7 @@ class App extends Component {
 	}
 
 	moveBook = (id, shelf) => {
-		console.log('SHELF', shelf)
 		BooksAPI.update({id}, shelf).then((response) => {
-			console.log('UPDATE', shelf)
 			BooksAPI.getAll().then((response) => {
 				return this.setState({
 					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
@@ -41,6 +39,7 @@ class App extends Component {
 	}
 
 	// Return the name of shelf of the book
+	// used to mark as selected the shelf of the book in the book options
 	whichShelf = (id) => {
 		let state = this.state
 		let books = state.wantToRead.concat(state.currentlyReading).concat(state.read)
