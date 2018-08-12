@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
-import ScheduleIcon from '@material-ui/icons/Schedule'
-import DoneIcon from '@material-ui/icons/Done'
-import DoneAllIcon from '@material-ui/icons/DoneAll'
+// import ScheduleIcon from '@material-ui/icons/Schedule'
+// import DoneIcon from '@material-ui/icons/Done'
+// import DoneAllIcon from '@material-ui/icons/DoneAll'
 import ClearIcon from '@material-ui/icons/Clear'
 import '../book.css'
 
@@ -11,7 +11,7 @@ class Book extends React.Component {
 
 	// using the whichShelf method passed originaly from parent component App,
 	// it identifies the shelf of the book then returns the style of this shelf button
-	selectedStyle = (shelf) => {
+	selected = (shelf) => {
 		if(shelf === this.props.whichShelf(this.props.id)) {
 			return {backgroundColor: 'rgba(0,0,0,0.19)'}
 		}
@@ -35,39 +35,33 @@ class Book extends React.Component {
 					<li>
 						<div>
 							<center>
-								<Button
-									className="btn small-font" style={this.selectedStyle('wantToRead')}
-									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
-									Want to Read <ScheduleIcon style={iconStyle} />
-								</Button>
-
+								{this.props.actionNames.map((action) => 
+									<Button key={this.props.id + action}
+										className="btn small-font" style={this.selected(action)}
+										onClick={() => {this.props.moveBook(this.props.id, action)}}>
+										{action}
+									</Button>
+								)}
 								<br/>
-
 								<Button
-									className="btn small-font" style={this.selectedStyle('currentlyReading')}
-									onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
-									Reading <DoneIcon style={iconStyle} />
-								</Button>
-
-								<br/>
-
-								<Button
-									className="btn small-font" style={this.selectedStyle('read')}
-									onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
-									Read <DoneAllIcon style={iconStyle} />
-								</Button>
-
-								<br/>
-
-								<Button
-									className="btn small-font" style={this.selectedStyle('none')}
+									className="btn small-font" style={this.selected('none')}
 									onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
 									None <ClearIcon style={iconStyle} />
 								</Button>
 							</center>
 						</div>
 					</li>
-					<li></li>
+					<li>
+						<div style={{ transform: 'rotate(360deg) scaleX(-1)' }}>
+							<center>
+								<Button
+									className="btn small-font" style={this.selected('wantToRead')}
+									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
+									New Shelf
+								</Button>
+							</center>
+						</div>
+					</li>
 					<li></li>
 					<li></li>
 				</ul>

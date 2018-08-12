@@ -7,6 +7,7 @@ import Library from './components/Library'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
+	// the state is shared through the workflow: App -> Library -> Shelf -> Book
 	state = {
 		wantToRead: [],
 		currentlyReading: [],
@@ -38,6 +39,13 @@ class App extends Component {
 		})
 	}
 
+
+
+	addShelf = (name) => {
+		this.setState({ name })
+	}
+
+
 	// Return the name of shelf of the book
 	// used to mark as selected the shelf of the book in the book options
 	whichShelf = (id) => {
@@ -49,6 +57,44 @@ class App extends Component {
 
 		if(book) return book.shelf
 		else return 'none'
+	}
+
+
+
+	// clear shelf by the name from state
+	clearShelf = (shelf) => {
+		let state = this.state
+
+		if(state[shelf]) {
+			let booksToRemove = state[shelf].filter((book) => book.shelf === shelf)
+
+			booksToRemove.forEach((book) => {
+				console.log(book)
+				BooksAPI.update({id: book.id}, 'none').then((response) => {
+					console.log(response)
+				})
+			})
+			BooksAPI.getAll().then((response) => {
+				return this.setState({
+					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
+					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
+					read: response.filter((book) => book.shelf === 'read'),
+				})
+			})
+			.then(() => {
+				const toast = swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000
+				});
+
+				toast({
+					type: 'success',
+					title: 'Shelf cleared'
+				})
+			})
+		}
 	}
 
 
@@ -67,7 +113,8 @@ class App extends Component {
 						<Library
 							getState={this.getState}
 							moveBook={this.moveBook}
-							whichShelf={this.whichShelf} />
+							whichShelf={this.whichShelf}
+							clearShelf={this.clearShelf} />
 					)} />
 
 					<Route path="/search" render={() => (

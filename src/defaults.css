@@ -73,3 +73,30 @@
   margin-top: 5px !important;
   padding: 4px 8px !important;
 }
+
+.shelf-action {
+  float: right;
+  margin-top: -17px;
+  margin-left: -120px;
+}
+
+.clear-shelf-btn {
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+.paper-adjust {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.grid-adjust {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.shelf-title-adjust {
+  fontSize: 18px;
+  padding: 10px;
+}

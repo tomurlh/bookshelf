@@ -26,9 +26,10 @@ class Search extends React.Component {
 				<br/><br/><br/><br/>
 				<div>
 					<Shelf
-						name="Queried Books"
+						name="queriedBooks"
 						books={this.state.books}
 						title={'Queried Books'}
+						whenEmpty="Perform a search to fetch books"
 						moveBook={this.props.moveBook}
 						whichShelf={this.props.whichShelf} />
 				</div>
