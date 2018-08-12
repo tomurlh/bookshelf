@@ -119,6 +119,7 @@ class App extends Component {
 
 					<Route path="/search" render={() => (
 						<Search
+							getState={this.getState}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf} />
 					)} />

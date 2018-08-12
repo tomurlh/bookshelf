@@ -12,6 +12,8 @@ class Search extends React.Component {
 	}
 
 	render() {
+		let shelfNames = Object.getOwnPropertyNames(this.props.getState())
+
 		return (
 			<div>
 				<div className="search-books-bar">
@@ -30,6 +32,7 @@ class Search extends React.Component {
 						books={this.state.books}
 						title={'Queried Books'}
 						whenEmpty="Perform a search to fetch books"
+						actionNames={shelfNames}
 						moveBook={this.props.moveBook}
 						whichShelf={this.props.whichShelf} />
 				</div>
