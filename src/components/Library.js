@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import BookIcon from '@material-ui/icons/Book'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
-import BookmarksIcon from '@material-ui/icons/Bookmarks'
+// import BookmarksIcon from '@material-ui/icons/Bookmarks'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -43,7 +43,7 @@ class Library extends React.Component {
 							books={books}
 							title={shelf}
 							actionNames={shelfNames}
-							moveBook={this.props.moveBook} 
+							moveBook={this.props.moveBook}
 							whichShelf={this.props.whichShelf}
 							clearShelf={this.props.clearShelf} />
 				})}

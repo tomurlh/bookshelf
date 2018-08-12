@@ -2,6 +2,7 @@
   "name": "bookshelf",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://tomurlh.github.io/my-reads",
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
@@ -19,7 +20,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
