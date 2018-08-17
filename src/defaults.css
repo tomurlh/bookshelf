@@ -100,3 +100,7 @@
   fontSize: 18px;
   padding: 10px;
 }
+
+.to-right {
+  margin-left: auto !important;
+}

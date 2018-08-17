@@ -14,13 +14,25 @@ class App extends Component {
 		read: []
 	}
 
+
+
 	moveBook = (id, shelf) => {
 		BooksAPI.update({id}, shelf).then((response) => {
 			BooksAPI.getAll().then((response) => {
-				return this.setState({
-					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-					read: response.filter((book) => book.shelf === 'read'),
+				let app = this
+				response.forEach(function(book) {
+					if(app.state[book.shelf] === undefined) {
+						app.setState({
+							[book.shelf]: []
+						})
+					}
+					// update the shelf
+					let shelf = app.state[book.shelf]
+					shelf.push(book)
+
+					app.setState({
+						[book.shelf]: book
+					})
 				})
 			})
 		})
@@ -42,12 +54,12 @@ class App extends Component {
 
 
 	addShelf = (name) => {
-		this.setState({ name })
+		this.setState({ [name]: [] })
 	}
 
 
 	// Return the name of shelf of the book
-	// used to mark as selected the shelf of the book in the book options
+	// used to mark as selected the shelf in the book options
 	whichShelf = (id) => {
 		let state = this.state
 		let books = state.wantToRead.concat(state.currentlyReading).concat(state.read)
@@ -114,7 +126,8 @@ class App extends Component {
 							getState={this.getState}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf}
-							clearShelf={this.clearShelf} />
+							clearShelf={this.clearShelf}
+							addShelf={this.addShelf} />
 					)} />
 
 					<Route path="/search" render={() => (
@@ -131,10 +144,21 @@ class App extends Component {
 	componentDidMount() {
 		localStorage.setItem('token', 'tomurlh-myreads')
 		BooksAPI.getAll().then((response) => {
-			this.setState({
-				wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-				currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-				read: response.filter((book) => book.shelf === 'read'),
+			let app = this
+			response.forEach(function(book) {
+				// adds new shelfs if exists
+				if(app.state[book.shelf] === undefined) {
+					app.setState({
+						[book.shelf]: []
+					})
+				}
+				// update the shelf
+				let shelf = app.state[book.shelf]
+				shelf.push(book)
+
+				app.setState({
+					[book.shelf]: shelf
+				})
 			})
 		})
 	}
