@@ -35,16 +35,16 @@ class Book extends React.Component {
 					<li>
 						<div>
 							<center>
-								{this.props.actionNames.map((action) => 
+								{this.props.actionNames.map((action) =>
 									<Button key={this.props.id + action}
-										className="btn small-font" style={this.selected(action)}
+										className="btn small-font"
 										onClick={() => {this.props.moveBook(this.props.id, action)}}>
 										{action}
 									</Button>
 								)}
 								<br/>
 								<Button
-									className="btn small-font" style={this.selected('none')}
+									className="btn small-font"
 									onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
 									None <ClearIcon style={iconStyle} />
 								</Button>

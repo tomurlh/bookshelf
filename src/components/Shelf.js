@@ -19,16 +19,41 @@ class Shelf extends React.Component {
 	// Methods that generate the layout of the Grid, accoding to number of books of the shelf
 	generateLayout(books) {
 		const p = this.props
-		return books.map((book, i) => {
-			const y = _.result(p, 'y') ||Math.ceil(Math.random() * 4) + 1
-			return {
-				i: book.id,
-				x: (i * 2) % 12,
-				y: Math.floor(i / 2) * y,
-				w: 2,
-				h: 1
-			}
-		})
+		if(books.length > 0) {
+			return books.map((book, i) => {
+				const y = _.result(p, 'y') ||Math.ceil(Math.random() * 4) + 1
+				return {
+					i: book.id,
+					x: (i * 2) % 12,
+					y: Math.floor(i / 2) * y,
+					w: 2,
+					h: 1
+				}
+			})
+		}
+		else {
+			return [
+				{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
+				{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
+				{i: 'c', x: 4, y: 0, w: 1, h: 2}
+			]
+		}
+	}
+
+
+
+	renderContent = () => {
+		if(this.props.books.length > 0) {
+			return this.props.books.map((book) =>
+			 	<div key={book.id}>
+					<Book
+						cover={book.imageLinks} id={book.id} actionNames={this.props.actionNames}
+						title={book.title} authors={book.authors} shelf={book.shelf}
+						moveBook={this.props.moveBook} whichShelf={this.props.whichShelf}
+						description={book.description} />
+				</div>
+			)
+		}
 	}
 
 
@@ -63,15 +88,7 @@ class Shelf extends React.Component {
 								width={1385}
 								layout={this.generateLayout(this.props.books)}
 								isResizable={false}>
-								{this.props.books.map((book) =>
-								 	<div key={book.id}>
-										<Book
-											cover={book.imageLinks} id={book.id} actionNames={this.props.actionNames}
-											title={book.title} authors={book.authors} shelf={book.shelf}
-											moveBook={this.props.moveBook} whichShelf={this.props.whichShelf}
-											description={book.description} />
-									</div>
-								)}
+								{this.renderContent()}
 							</GridLayout>
 							{this.props.books.length <= 0 &&
 								<Typography variant="caption" gutterBottom align="center">

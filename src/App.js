@@ -15,6 +15,8 @@ class App extends Component {
 		read: []
 	}
 
+
+
 	moveBook = (id, shelf) => {
 		this.props.moveBook({ 
 			variables: {
@@ -49,12 +51,12 @@ class App extends Component {
 
 
 	addShelf = (name) => {
-		this.setState({ name })
+		this.setState({ [name]: [] })
 	}
 
 
 	// Return the name of shelf of the book
-	// used to mark as selected the shelf of the book in the book options
+	// used to mark as selected the shelf in the book options
 	whichShelf = (id) => {
 		let state = this.state
 		let books = state.wantToRead.concat(state.currentlyReading).concat(state.read)
@@ -126,7 +128,8 @@ class App extends Component {
 							getState={this.getState}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf}
-							clearShelf={this.clearShelf} />
+							clearShelf={this.clearShelf}
+							addShelf={this.addShelf} />
 					)} />
 
 					<Route path="/search" render={() => (
