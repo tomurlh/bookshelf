@@ -51,17 +51,7 @@ class Book extends React.Component {
 							</center>
 						</div>
 					</li>
-					<li>
-						<div style={{ transform: 'rotate(360deg) scaleX(-1)' }}>
-							<center>
-								<Button
-									className="btn small-font" style={this.selected('wantToRead')}
-									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
-									New Shelf
-								</Button>
-							</center>
-						</div>
-					</li>
+					<li></li>
 					<li></li>
 					<li></li>
 				</ul>
@@ -85,7 +75,7 @@ Book.propTypes = {
 	cover: PropTypes.object.isRequired,
 	title: PropTypes.string,
 	authors: PropTypes.array,
-	shelf: PropTypes.string.isRequired,
+	shelf: PropTypes.string,
 	moveBook: PropTypes.func,
 	whichShelf: PropTypes.func,
 	description: PropTypes.string,

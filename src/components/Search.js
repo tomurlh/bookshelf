@@ -3,7 +3,8 @@ import { debounce } from 'lodash'
 import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
 import swal from 'sweetalert2'
-import * as BooksAPI from '../utils/BooksAPI'
+import { graphql } from 'react-apollo'
+import { SEARCH_BOOKS } from '../utils/Requests.graphql'
 
 class Search extends React.Component {
 	state = {
@@ -42,13 +43,16 @@ class Search extends React.Component {
 
 
 	// Query performed with debounce from Lodash
-	queryBooks = debounce((queryText) => {
-		if(!queryText) {
+	queryBooks = debounce((query) => {
+		if(!query) {
 			this.setState({ books: [] })
 			return
 		}
 
-		BooksAPI.search(queryText).then((response) => {
+	this.props.searchBooks({
+        variables: { input: { query } }
+  	}).then((response) => {
+      	console.log('RESPONSE', response)
 			if(response.error) {
 				this.setState({ books: [] })
 				// Alert message
@@ -60,7 +64,7 @@ class Search extends React.Component {
 
 				return
 			}
-			this.setState({ books: response })
+			this.setState({ books: response.data.data.books })
 			// Alert message
 			const toast = swal.mixin({
 				toast: true, position: 'top-end',
@@ -71,4 +75,4 @@ class Search extends React.Component {
 	}, 1500)
 }
 
-export default Search
+export default graphql(SEARCH_BOOKS, { name: 'searchBooks' })(Search)

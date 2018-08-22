@@ -5,6 +5,15 @@ This is a bookshelf app that allows you to select and categorize books you have 
 Application from the Nanodegree program of React from Udacity.
 
 
+## External Libraries
+
+- material-ui
+- lodash
+- react-router
+- react-grid-layout
+- sweetalert2
+
+
 ## Installing
 
 - Install all project dependencies with `npm install`;
@@ -13,7 +22,7 @@ Application from the Nanodegree program of React from Udacity.
 
 ## Shelfs
 
-The app comes with 3 predefined shelfs:
+The app comes with 3 shelfs:
 
 - Want To Read;
 - Currently Reading;

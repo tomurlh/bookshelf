@@ -2,13 +2,20 @@
   "name": "bookshelf",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://tomurlh.github.io/my-reads",
+  "homepage": "https://tomurlh.github.io/my-reads",
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
+    "apollo-boost": "^0.1.14",
+    "apollo-client-preset": "^1.0.8",
+    "apollo-link-context": "^1.0.8",
+    "apollo-link-rest": "^0.4.4",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-apollo": "^2.1.11",
     "react-dom": "^16.4.1",
     "react-grid-layout": "^0.16.6",
     "react-router-dom": "^4.3.1",
@@ -24,6 +31,9 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0"
+    "enzyme": "^3.4.2",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "gh-pages": "^1.2.0",
+    "sinon": "^6.1.5"
   }
 }

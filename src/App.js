@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import swal from 'sweetalert2'
-import * as BooksAPI from './utils/BooksAPI'
+import { graphql, compose } from 'react-apollo'
+import { GET_ALL, MOVE_BOOK } from './utils/Requests.graphql'
 import Search from './components/Search'
 import Library from './components/Library'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -15,8 +16,14 @@ class App extends Component {
 	}
 
 	moveBook = (id, shelf) => {
-		BooksAPI.update({id}, shelf).then((response) => {
-			BooksAPI.getAll().then((response) => {
+		this.props.moveBook({ 
+			variables: {
+				id: id,
+				input: shelf
+			}
+		})
+		.then((response) => {
+			this.props.getAll().then((response) => {
 				return this.setState({
 					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
 					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
@@ -70,11 +77,16 @@ class App extends Component {
 
 			booksToRemove.forEach((book) => {
 				console.log(book)
-				BooksAPI.update({id: book.id}, 'none').then((response) => {
+				this.props.moveBook({ 
+					variables: {
+						id: book.id,
+						input: 'none'
+					}
+				}).then((response) => {
 					console.log(response)
 				})
 			})
-			BooksAPI.getAll().then((response) => {
+			this.props.getAll().then((response) => {
 				return this.setState({
 					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
 					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
@@ -129,15 +141,18 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		localStorage.setItem('token', 'tomurlh-myreads')
-		BooksAPI.getAll().then((response) => {
-			this.setState({
-				wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-				currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-				read: response.filter((book) => book.shelf === 'read'),
-			})
-		})
+		console.log(this.props.getAll)
+		// this.props.getAll().then((response) => {
+		// 	this.setState({
+		// 		wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
+		// 		currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
+		// 		read: response.filter((book) => book.shelf === 'read'),
+		// 	})
+		// })
 	}
 }
 
-export default App
+export default compose(
+  graphql(GET_ALL, { name: 'getAll' }),
+  graphql(MOVE_BOOK, { name: 'moveBook' })
+)(App)
