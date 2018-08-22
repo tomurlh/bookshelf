@@ -5,10 +5,10 @@ export const GET_ALL = gql`
 		data @rest(type: "Books", path: "/books") {
 			books @type(name: "Book") {
 				id
-				title
 				shelf
-				imageLinks
+				title
 				authors
+				imageLinks
 			}
 		}
 	}
@@ -20,10 +20,10 @@ export const MOVE_BOOK = gql`
 		@rest(type: "Update", path: "/books/:id", method: "PUT") {
 			books @type(name: "Book") {
 				id
-				title
 				shelf
-				imageLinks
+				title
 				authors
+				imageLinks
 			}
 		}
 	}
@@ -35,10 +35,10 @@ export const SEARCH_BOOKS = gql`
 		@rest(type: "Search", path: "/search", method: "POST") {
 			books @type(name: "Book") {
 				id
-				title
 				shelf
-				imageLinks
+				title
 				authors
+				imageLinks
 			}
 		}
 	}

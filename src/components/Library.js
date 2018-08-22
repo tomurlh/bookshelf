@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
-import BookIcon from '@material-ui/icons/Book'
 import OpenBookIcon from '@material-ui/icons/ImportContacts'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 
@@ -15,7 +14,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import Shelf from './Shelf'
-import AddShelfForm from './AddShelfForm'
 
 class Library extends React.Component {
 	state = {
@@ -43,36 +41,40 @@ class Library extends React.Component {
 						<Typography variant="title" color="inherit">
 						MyReads <OpenBookIcon />
 						</Typography>
-						<Button color="inherit" className="to-right" onClick={this.handleClickOpen}>Add Shelf <BookIcon /></Button>
 					</Toolbar>
 				</AppBar>
 				<br/>
-
-				<AddShelfForm
-					open={this.state.open}
-					handleClose={this.handleClose}
-					addShelf={this.props.addShelf}
-				/>
 
 				<Typography variant="title" color="inherit" style={{ marginLeft: '20px', marginRight: '20px' }}>
 					My Library <LibraryBooksIcon />
 				</Typography>
 				<br/>
 
-				{Object.getOwnPropertyNames(this.props.getState()).map((shelf) => {
-					let books = this.props.getState()[shelf];
-					let shelfNames = Object.getOwnPropertyNames(this.props.getState())
-
-					return <Shelf
-							key={shelf}
-							name={shelf}
-							books={books}
-							title={shelf}
-							actionNames={shelfNames}
-							moveBook={this.props.moveBook}
-							whichShelf={this.props.whichShelf}
-							clearShelf={this.props.clearShelf} />
-				})}
+				<Shelf 
+					name="wantToRead" 
+					books={this.props.getState().wantToRead} 
+					title={'Want To Read'} 
+					moveBook={this.props.moveBook} 
+					whichShelf={this.props.whichShelf}
+					clearShelf={this.props.clearShelf} />
+				<br/>
+				
+				<Shelf 
+				name="currentlyReading" 
+				books={this.props.getState().currentlyReading} 
+				title={'Currently Reading'} 
+				moveBook={this.props.moveBook} 
+				whichShelf={this.props.whichShelf}
+				clearShelf={this.props.clearShelf} />
+				<br/>
+				
+				<Shelf 
+				name="read" 
+				books={this.props.getState().read} 
+				title={'Read'} 
+				moveBook={this.props.moveBook} 
+				whichShelf={this.props.whichShelf}
+				clearShelf={this.props.clearShelf} />
 
 				<Link to={{
 					pathname: '/search',

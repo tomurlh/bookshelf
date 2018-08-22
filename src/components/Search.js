@@ -52,7 +52,6 @@ class Search extends React.Component {
 	this.props.searchBooks({
         variables: { input: { query } }
   	}).then((response) => {
-      	console.log('RESPONSE', response)
 			if(response.error) {
 				this.setState({ books: [] })
 				// Alert message

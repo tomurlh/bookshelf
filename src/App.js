@@ -21,17 +21,11 @@ class App extends Component {
 		this.props.moveBook({ 
 			variables: {
 				id: id,
-				input: shelf
+				input: { shelf }
 			}
 		})
 		.then((response) => {
-			this.props.getAll().then((response) => {
-				return this.setState({
-					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-					read: response.filter((book) => book.shelf === 'read'),
-				})
-			})
+			this.props.getAll.refetch()
 		})
 		.then(() => {
 			const toast = swal.mixin({
@@ -60,11 +54,8 @@ class App extends Component {
 	whichShelf = (id) => {
 		let state = this.state
 		let books = state.wantToRead.concat(state.currentlyReading).concat(state.read)
-		let book = books.find(function(b) {
-			return b.id === id
-		})
-
-		if(book) return book.shelf
+		var book = books.find((b) => b.id === id)
+		if(book !== undefined) return book.shelf
 		else return 'none'
 	}
 
@@ -78,23 +69,14 @@ class App extends Component {
 			let booksToRemove = state[shelf].filter((book) => book.shelf === shelf)
 
 			booksToRemove.forEach((book) => {
-				console.log(book)
-				this.props.moveBook({ 
+				this.props.moveBook({
 					variables: {
 						id: book.id,
-						input: 'none'
+						input: {shelf: 'none'}
 					}
-				}).then((response) => {
-					console.log(response)
 				})
 			})
-			this.props.getAll().then((response) => {
-				return this.setState({
-					wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-					currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-					read: response.filter((book) => book.shelf === 'read'),
-				})
-			})
+			this.props.getAll.refetch()
 			.then(() => {
 				const toast = swal.mixin({
 					toast: true,
@@ -143,15 +125,14 @@ class App extends Component {
 		)
 	}
 
-	componentDidMount() {
-		console.log(this.props.getAll)
-		// this.props.getAll().then((response) => {
-		// 	this.setState({
-		// 		wantToRead: response.filter((book) => book.shelf === 'wantToRead'),
-		// 		currentlyReading: response.filter((book) => book.shelf === 'currentlyReading'),
-		// 		read: response.filter((book) => book.shelf === 'read'),
-		// 	})
-		// })
+	componentWillReceiveProps(newProps) {
+		if(!newProps.getAll.loading) {
+			this.setState({
+				wantToRead: newProps.getAll.data.books.filter((book) => book.shelf === 'wantToRead'),
+				currentlyReading: newProps.getAll.data.books.filter((book) => book.shelf === 'currentlyReading'),
+				read: newProps.getAll.data.books.filter((book) => book.shelf === 'read'),
+			})
+		}
 	}
 }
 

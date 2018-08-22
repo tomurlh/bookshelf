@@ -9,6 +9,7 @@ Application from the Nanodegree program of React from Udacity.
 
 - material-ui
 - lodash
+- Apollo + GraphQL
 - react-router
 - react-grid-layout
 - sweetalert2
