@@ -19,7 +19,7 @@ class Book extends React.Component {
 	}
 
 	render() {
-		let iconStyle = { fontSize: 15, verticalAlign: 'middle' }
+		let iconStyle = { fontSize: 15, verticalAlign: 'middle', zIndex: '-5' }
 		let image = this.props.cover.smallThumbnail
 	    return (
 			<figure className='book'>
