@@ -75,6 +75,7 @@ class App extends Component {
 						input: {shelf: 'none'}
 					}
 				})
+				.then(() => {})
 			})
 			this.props.getAll.refetch()
 			.then(() => {
@@ -91,12 +92,6 @@ class App extends Component {
 				})
 			})
 		}
-	}
-
-
-
-	getState = () => {
-		return this.state
 	}
 
 
