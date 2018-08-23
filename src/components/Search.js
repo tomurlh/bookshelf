@@ -13,7 +13,7 @@ class Search extends React.Component {
 	}
 
 	render() {
-		let shelfNames = Object.getOwnPropertyNames(this.props.getState())
+		let shelfNames = Object.getOwnPropertyNames(this.props.state)
 
 		return (
 			<div>
@@ -26,8 +26,7 @@ class Search extends React.Component {
 							onChange={e => this.queryBooks(e.target.value)} />
 					</div>
 				</div>
-				<br/><br/><br/><br/>
-				<div>
+				<div style={{ marginTop: '80px' }}>
 					<Shelf
 						name="queriedBooks"
 						books={this.state.books}
@@ -63,6 +62,7 @@ class Search extends React.Component {
 
 				return
 			}
+			console.log(response.data.data.books)
 			this.setState({ books: response.data.data.books })
 			// Alert message
 			const toast = swal.mixin({

@@ -7,88 +7,86 @@ import DoneAllIcon from '@material-ui/icons/DoneAll'
 import ClearIcon from '@material-ui/icons/Clear'
 import '../book.css'
 
-class Book extends React.Component {
+const Book = (props) => {
+	let iconStyle = { fontSize: 15, verticalAlign: 'middle', zIndex: '-5' }
 
 	// using the whichShelf method passed originaly from parent component App,
 	// it identifies the shelf of the book then returns the style of this shelf button
-	selected = (shelf) => {
-		if(shelf === this.props.whichShelf(this.props.id)) {
+	const selected = (shelf) => {
+		if(shelf === props.whichShelf(props.id)) {
 			return {backgroundColor: 'rgba(0,0,0,0.19)'}
 		}
 		else return {}
 	}
 
-	render() {
-		let iconStyle = { fontSize: 15, verticalAlign: 'middle', zIndex: '-5' }
-		let image = this.props.cover.smallThumbnail
-	    return (
-			<figure className='book'>
-				<ul className='hardcover_front'>
-					<li>
-						<img src={image} alt="not available" width="100%" height="100%"/>
-					</li>
-					<li></li>
-				</ul>
+    return (
+		<figure className='book'>
+			<ul className='hardcover_front'>
+				<li>
+					{ props.cover
+						? <img src={props.cover.smallThumbnail} alt="not available" width="100%" height="100%"/>
+						: <img src="#" alt="not available" width="100%" height="100%"/>
+					}
+				</li>
+				<li></li>
+			</ul>
 
-				<ul className='page'>
-					<li></li>
-					<li>
-						<div>
-							<center>
+			<ul className='page'>
+				<li></li>
+				<li>
+					<div>
+						<center>
+							<p>
 								<Button
-									className="btn small-font" style={this.selected('wantToRead')}
-									onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
+									className="btn small-font" style={selected('wantToRead')}
+									onClick={() => {props.moveBook(props.id, 'wantToRead')}}>
 									Want to Read <ScheduleIcon style={iconStyle} />
 								</Button>
-
-								<br/>
-
+							</p>
+							<p>
 								<Button
-									className="btn small-font" style={this.selected('currentlyReading')}
-									onClick={() => {this.props.moveBook(this.props.id, 'currentlyReading')}}>
+									className="btn small-font" style={selected('currentlyReading')}
+									onClick={() => {props.moveBook(props.id, 'currentlyReading')}}>
 									Reading <DoneIcon style={iconStyle} />
 								</Button>
-
-								<br/>
-
+							</p>
+							<p>
 								<Button
-									className="btn small-font" style={this.selected('read')}
-									onClick={() => {this.props.moveBook(this.props.id, 'read')}}>
+									className="btn small-font" style={selected('read')}
+									onClick={() => {props.moveBook(props.id, 'read')}}>
 									Read <DoneAllIcon style={iconStyle} />
 								</Button>
-
-								<br/>
-
+							</p>
+							<p>
 								<Button
-									className="btn small-font"
-									onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
+									className="btn small-font" style={selected('none')}
+									onClick={() => {props.moveBook(props.id, 'none')}}>
 									None <ClearIcon style={iconStyle} />
 								</Button>
-							</center>
-						</div>
-					</li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
+							</p>
+						</center>
+					</div>
+				</li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
 
-				<ul className='hardcover_back'>
-					<li></li>
-					<li></li>
-				</ul>
-				<br/><br/><br/><br/>
-				<figcaption>
-					<h4>{this.props.title}</h4>
-					<span>{this.props.authors}</span>
-				</figcaption>
-			</figure>
-	    )
-	}
+			<ul className='hardcover_back'>
+				<li></li>
+				<li></li>
+			</ul>
+			<figcaption>
+				<h4>{props.title}</h4>
+				<span>{props.authors}</span>
+			</figcaption>
+		</figure>
+	)
 }
 
 Book.propTypes = {
 	id: PropTypes.string.isRequired,
-	cover: PropTypes.object.isRequired,
+	cover: PropTypes.object,
 	title: PropTypes.string,
 	authors: PropTypes.array,
 	shelf: PropTypes.string,

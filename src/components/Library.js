@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '../defaults.css'
 
 import { Link } from 'react-router-dom'
@@ -15,82 +16,63 @@ import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import Shelf from './Shelf'
 
-class Library extends React.Component {
-	state = {
-		open: false,
-		newShelf: ''
-	}
+const Library = (props) => {
 
+	return (
+		<div>
+			<AppBar position="static" color="primary" className="br">
+				<Toolbar>
+					<Typography variant="title" color="inherit">
+					MyReads <OpenBookIcon />
+					</Typography>
+				</Toolbar>
+			</AppBar>
 
+			<Typography variant="title" color="inherit" style={{ marginLeft: '20px', marginRight: '20px', marginBottom: '20px' }}>
+				My Library <LibraryBooksIcon />
+			</Typography>
 
-	handleClickOpen = () => {
-		this.setState({ open: true });
-	}
+			<Shelf 
+				name="wantToRead" className="br"
+				books={props.state.wantToRead}
+				title={'Want To Read'}
+				moveBook={props.moveBook}
+				whichShelf={props.whichShelf}
+				clearShelf={props.clearShelf} />
+			
+			<Shelf 
+			name="currentlyReading" className="br"
+			books={props.state.currentlyReading} 
+			title={'Currently Reading'} 
+			moveBook={props.moveBook} 
+			whichShelf={props.whichShelf}
+			clearShelf={props.clearShelf} />
+			
+			<Shelf 
+			name="read" 
+			books={props.state.read} 
+			title={'Read'} 
+			moveBook={props.moveBook} 
+			whichShelf={props.whichShelf}
+			clearShelf={props.clearShelf} />
 
-	handleClose = () => {
-		this.setState({ open: false });
-	}
+			<Link to={'/search'}>
+				<Tooltip title="Add new book">
+					<Button variant="fab" color="primary" aria-label="Add" className="open-search">
+						<AddIcon />
+					</Button>
+				</Tooltip>
+			</Link>
+		</div>
+	)
+}
 
-
-
-	render() {
-		return (
-			<div>
-				<AppBar position="static" color="primary">
-					<Toolbar>
-						<Typography variant="title" color="inherit">
-						MyReads <OpenBookIcon />
-						</Typography>
-					</Toolbar>
-				</AppBar>
-				<br/>
-
-				<Typography variant="title" color="inherit" style={{ marginLeft: '20px', marginRight: '20px' }}>
-					My Library <LibraryBooksIcon />
-				</Typography>
-				<br/>
-
-				<Shelf 
-					name="wantToRead" 
-					books={this.props.getState().wantToRead} 
-					title={'Want To Read'} 
-					moveBook={this.props.moveBook} 
-					whichShelf={this.props.whichShelf}
-					clearShelf={this.props.clearShelf} />
-				<br/>
-				
-				<Shelf 
-				name="currentlyReading" 
-				books={this.props.getState().currentlyReading} 
-				title={'Currently Reading'} 
-				moveBook={this.props.moveBook} 
-				whichShelf={this.props.whichShelf}
-				clearShelf={this.props.clearShelf} />
-				<br/>
-				
-				<Shelf 
-				name="read" 
-				books={this.props.getState().read} 
-				title={'Read'} 
-				moveBook={this.props.moveBook} 
-				whichShelf={this.props.whichShelf}
-				clearShelf={this.props.clearShelf} />
-
-				<Link to={{
-					pathname: '/search',
-					state: {
-						state: this.something
-					}
-				}}>
-					<Tooltip title="Add new book">
-						<Button variant="fab" color="primary" aria-label="Add" className="open-search">
-							<AddIcon />
-						</Button>
-					</Tooltip>
-				</Link>
-			</div>
-		)
-	}
+Library.propTypes = {
+	state: PropTypes.object.isRequired,
+	moveBook: PropTypes.func.isRequired,
+	whichShelf: PropTypes.func.isRequired,
+	clearShelf: PropTypes.func.isRequired,
+	addShelf: PropTypes.func.isRequired,
 }
 
 export default Library

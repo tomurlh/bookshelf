@@ -107,7 +107,7 @@ class App extends Component {
 				<div>
 					<Route path="/" exact render={() => (
 						<Library
-							getState={this.getState}
+							state={this.state}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf}
 							clearShelf={this.clearShelf}
@@ -116,7 +116,7 @@ class App extends Component {
 
 					<Route path="/search" render={() => (
 						<Search
-							getState={this.getState}
+							state={this.state}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf} />
 					)} />
