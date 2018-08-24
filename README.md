@@ -10,6 +10,7 @@ Application from the Nanodegree program of React from Udacity.
 - material-ui
 - lodash
 - Apollo + GraphQL
+- Mocha + Enzyme
 - react-router
 - react-grid-layout
 - sweetalert2
