@@ -13,8 +13,6 @@ class Search extends React.Component {
 	}
 
 	render() {
-		let shelfNames = Object.getOwnPropertyNames(this.props.state)
-
 		return (
 			<div>
 				<div className="search-books-bar">
@@ -31,10 +29,9 @@ class Search extends React.Component {
 						name="queriedBooks"
 						books={this.state.books}
 						title={'Queried Books'}
+						whichShelf={this.props.whichShelf}
 						whenEmpty="Perform a search to fetch books"
-						actionNames={shelfNames}
-						moveBook={this.props.moveBook}
-						whichShelf={this.props.whichShelf} />
+						moveBook={this.props.moveBook} />
 				</div>
 			</div>
 		)
@@ -51,27 +48,25 @@ class Search extends React.Component {
 	this.props.searchBooks({
         variables: { input: { query } }
   	}).then((response) => {
-			if(response.error) {
-				this.setState({ books: [] })
-				// Alert message
-				const toast = swal.mixin({
-					toast: true, position: 'top-end',
-					showConfirmButton: false, timer: 3000
-				})
-				toast({ type: 'error', title: 'the search did not match any books' })
-
-				return
-			}
-			console.log(response.data.data.books)
-			this.setState({ books: response.data.data.books })
+		if(response.error) {
+			this.setState({ books: [] })
 			// Alert message
 			const toast = swal.mixin({
 				toast: true, position: 'top-end',
 				showConfirmButton: false, timer: 3000
 			})
-			toast({ type: 'success', title: 'Research completed' })
+			toast({ type: 'error', title: 'the search did not match any books' })
+
+			return
+		}
+		this.setState({ books: response.data.data.books })
+		// Alert message
+		const toast = swal.mixin({
+			toast: true, position: 'top-end',
+			showConfirmButton: false, timer: 3000
 		})
-	}, 1500)
+		toast({ type: 'success', title: 'Research completed' })
+	})}, 500)
 }
 
 export default graphql(SEARCH_BOOKS, { name: 'searchBooks' })(Search)

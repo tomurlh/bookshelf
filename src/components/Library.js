@@ -32,29 +32,29 @@ const Library = (props) => {
 				My Library <LibraryBooksIcon />
 			</Typography>
 
-			<Shelf 
+			<Shelf
 				name="wantToRead" className="br"
 				books={props.state.wantToRead}
 				title={'Want To Read'}
 				moveBook={props.moveBook}
 				whichShelf={props.whichShelf}
 				clearShelf={props.clearShelf} />
-			
-			<Shelf 
-			name="currentlyReading" className="br"
-			books={props.state.currentlyReading} 
-			title={'Currently Reading'} 
-			moveBook={props.moveBook} 
-			whichShelf={props.whichShelf}
-			clearShelf={props.clearShelf} />
-			
-			<Shelf 
-			name="read" 
-			books={props.state.read} 
-			title={'Read'} 
-			moveBook={props.moveBook} 
-			whichShelf={props.whichShelf}
-			clearShelf={props.clearShelf} />
+
+			<Shelf
+				name="currentlyReading" className="br"
+				books={props.state.currentlyReading}
+				title={'Currently Reading'}
+				moveBook={props.moveBook}
+				whichShelf={props.whichShelf}
+				clearShelf={props.clearShelf} />
+
+			<Shelf
+				name="read"
+				books={props.state.read}
+				title={'Read'}
+				moveBook={props.moveBook}
+				whichShelf={props.whichShelf}
+				clearShelf={props.clearShelf} />
 
 			<Link to={'/search'}>
 				<Tooltip title="Add new book">
@@ -70,9 +70,7 @@ const Library = (props) => {
 Library.propTypes = {
 	state: PropTypes.object.isRequired,
 	moveBook: PropTypes.func.isRequired,
-	whichShelf: PropTypes.func.isRequired,
 	clearShelf: PropTypes.func.isRequired,
-	addShelf: PropTypes.func.isRequired,
 }
 
 export default Library

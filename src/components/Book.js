@@ -13,6 +13,7 @@ const Book = (props) => {
 	// using the whichShelf method passed originaly from parent component App,
 	// it identifies the shelf of the book then returns the style of this shelf button
 	const selected = (shelf) => {
+		// console.log(shelf, props.shelf);
 		if(shelf === props.whichShelf(props.id)) {
 			return {backgroundColor: 'rgba(0,0,0,0.19)'}
 		}
@@ -97,7 +98,6 @@ Book.propTypes = {
 
 Book.defaultProps = {
 	id: '',
-	shelf: '',
 	cover: {}
 }
 

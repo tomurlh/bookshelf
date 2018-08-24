@@ -44,13 +44,10 @@ class App extends Component {
 
 
 
-	addShelf = (name) => {
-		this.setState({ [name]: [] })
-	}
-
-
-	// Return the name of shelf of the book
-	// used to mark as selected the shelf in the book options
+	// Return the name of shelf of the book.
+	// Used to mark as selected the shelf in the book options.
+	// This method is necessary because in the search page,
+	// all the books comes with the shelf null
 	whichShelf = (id) => {
 		let state = this.state
 		let books = state.wantToRead.concat(state.currentlyReading).concat(state.read)
@@ -105,8 +102,7 @@ class App extends Component {
 							state={this.state}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf}
-							clearShelf={this.clearShelf}
-							addShelf={this.addShelf} />
+							clearShelf={this.clearShelf} />
 					)} />
 
 					<Route path="/search" render={() => (
@@ -122,10 +118,13 @@ class App extends Component {
 
 	componentWillReceiveProps(newProps) {
 		if(!newProps.getAll.loading) {
-			this.setState({
-				wantToRead: newProps.getAll.data.books.filter((book) => book.shelf === 'wantToRead'),
-				currentlyReading: newProps.getAll.data.books.filter((book) => book.shelf === 'currentlyReading'),
-				read: newProps.getAll.data.books.filter((book) => book.shelf === 'read'),
+			this.props.getAll.refetch()
+			.then((response) => {
+				this.setState({
+					wantToRead: newProps.getAll.data.books.filter((book) => book.shelf === 'wantToRead'),
+					currentlyReading: newProps.getAll.data.books.filter((book) => book.shelf === 'currentlyReading'),
+					read: newProps.getAll.data.books.filter((book) => book.shelf === 'read'),
+				})
 			})
 		}
 	}

@@ -48,10 +48,10 @@ const Shelf = (props) => {
 			return props.books.map((book) =>
 			 	<div key={book.id}>
 					<Book
-						cover={book.imageLinks} id={book.id} actionNames={props.actionNames}
-						title={book.title} authors={book.authors} shelf={book.shelf}
-						moveBook={props.moveBook} whichShelf={props.whichShelf}
-						description={book.description} />
+						cover={book.imageLinks} id={book.id} title={book.title}
+						authors={book.authors} whichShelf={props.whichShelf}
+						shelf={book.shelf}
+						moveBook={props.moveBook} description={book.description} />
 				</div>
 			)
 		}
@@ -116,7 +116,6 @@ Shelf.propTypes = {
 	books: PropTypes.array.isRequired,
 	title: PropTypes.string.isRequired,
 	moveBook: PropTypes.func.isRequired,
-	whichShelf: PropTypes.func.isRequired,
 	clearShelf: PropTypes.func,
 }
 
