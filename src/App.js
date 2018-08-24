@@ -18,7 +18,7 @@ class App extends Component {
 
 
 	moveBook = (id, shelf) => {
-		this.props.moveBook({ 
+		this.props.moveBook({
 			variables: {
 				id: id,
 				input: { shelf }
