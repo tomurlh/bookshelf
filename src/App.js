@@ -72,7 +72,7 @@ class App extends Component {
 						input: {shelf: 'none'}
 					}
 				})
-				.then(() => {})
+				.then(() => { this.props.getAll.refetch() })
 			})
 			this.props.getAll.refetch()
 			.then(() => {
