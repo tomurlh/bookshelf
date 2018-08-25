@@ -5,7 +5,7 @@ import { graphql, compose } from 'react-apollo'
 import { GET_ALL, MOVE_BOOK } from './utils/Requests.graphql'
 import Search from './components/Search'
 import Library from './components/Library'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 
 
 class App extends Component {
@@ -96,7 +96,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<Router>
+			<HashRouter>
 				<div>
 					<Route path="/" exact render={() => (
 						<Library
@@ -114,7 +114,7 @@ class App extends Component {
 							whichShelf={this.whichShelf} />
 					)} />
 				</div>
-			</Router>
+			</HashRouter>
 		)
 	}
 

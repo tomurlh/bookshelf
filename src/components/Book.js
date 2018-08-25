@@ -11,7 +11,8 @@ import '../book.css'
 
 class Book extends React.Component {
 	state = {
-		open: false
+		open: false,
+		bookClass: 'book fadeIn'
 	}
 
 	handleClickOpen = () => {
@@ -34,12 +35,18 @@ class Book extends React.Component {
 		else return {}
 	}
 
+	makeRemoveAnimation() {
+		if(!this.props.inSearch)
+			this.setState({ bookClass: 'book fadeOut' })
+	}
+
+
 
 
 	render() {
 		let iconStyle = { fontSize: 15, verticalAlign: 'middle', zIndex: '-5' }
 	    return (
-			<figure className='book'>
+			<figure className={this.state.bookClass}>
 				<ul className='hardcover_front'>
 					<li>
 						{ this.props.cover
@@ -58,7 +65,8 @@ class Book extends React.Component {
 								<p>
 									<Button
 										className="btn small-font" style={this.selected('wantToRead')}
-										onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')}}>
+										onClick={() => {this.props.moveBook(this.props.id, 'wantToRead')
+										}}>
 										Want to Read <ScheduleIcon style={iconStyle} />
 									</Button>
 								</p>
@@ -79,7 +87,10 @@ class Book extends React.Component {
 								<p>
 									<Button
 										className="btn small-font" style={this.selected('none')}
-										onClick={() => {this.props.moveBook(this.props.id, 'none')}}>
+										onClick={() => {
+											this.makeRemoveAnimation()
+											this.props.moveBook(this.props.id, 'none')
+										}}>
 										None <ClearIcon style={iconStyle} />
 									</Button>
 								</p>

@@ -55,7 +55,7 @@ class Shelf extends React.Component {
 					<Book
 						cover={book.imageLinks} id={book.id} title={book.title}
 						authors={book.authors} whichShelf={this.props.whichShelf}
-						shelf={book.shelf}
+						shelf={book.shelf} inSearch={this.props.inSearch}
 						moveBook={this.props.moveBook} description={book.description} />
 				</div>
 			}
@@ -65,7 +65,7 @@ class Shelf extends React.Component {
 
 
 	render() {
-		let shelfActionStyle = { color: 'white', backgroundColor: '#F57C00' }
+		let shelfActionStyle = { color: 'black', backgroundColor: '#FFC107' }
 		let shelfLastActionStyle = { color: 'white', backgroundColor: '#D32F2F' }
 		let shelfActionIconStyle = { fontSize: 15, verticalAlign: 'middle' }
 		return (
@@ -74,33 +74,34 @@ class Shelf extends React.Component {
 					<Grid container spacing={24}>
 						<Grid item xs={12} className="grid-adjust">
 							<Grid container spacing={8}>
-								<Grid item xs={3}>
+								<Grid item xs={4}>
 									<Typography>
-										<span color="inherit" className="shelf-title-adjust">
-											{this.props.title}
+										<span color="inherit" className="shelf-title-adjust" style={{ fontSize: '15px', verticalAlign: 'middle' }}>
+											<span className="shelf-title">{this.props.title}</span>
+											{this.props.icon}
 										</span>
 									</Typography>
 								</Grid>
 
-								<Grid item xs={7}></Grid>
+								<Grid item xs={6}></Grid>
 
 								<Grid item xs={2}>
-									<span className="shelf-actions">
-										<Button
-											variant="contained" style={shelfActionStyle} size="small"
-											className="small-font shelf-btn"
-											onClick={() => {this.resetLayout(this.props.name)}}>
-											Reorganize <ClearAllIcon style={shelfActionIconStyle} />
-										</Button>
 									{this.props.clearShelf !== undefined &&
-										<Button
-											variant="contained" style={shelfLastActionStyle} size="small"
-											className="small-font last-shelf-btn"
-											onClick={() => {this.props.clearShelf(this.props.name)}}>
-											Clear Shelf <RemoveCircleIcon style={shelfActionIconStyle} />
-										</Button>
+										<span className="shelf-actions">
+											<Button
+												variant="contained" style={shelfActionStyle} size="small"
+												className="small-font shelf-btn"
+												onClick={() => {this.resetLayout(this.props.name)}}>
+													Reorganize <ClearAllIcon style={shelfActionIconStyle} />
+											</Button>
+											<Button
+												variant="contained" style={shelfLastActionStyle} size="small"
+												className="small-font last-shelf-btn"
+												onClick={() => {this.props.clearShelf(this.props.name)}}>
+													Clear Shelf <RemoveCircleIcon style={shelfActionIconStyle} />
+											</Button>
+										</span>
 									}
-									</span>
 								</Grid>
 							</Grid>
 							<Divider style={{ marginBottom: '10px' }} />
@@ -108,7 +109,7 @@ class Shelf extends React.Component {
 							<ResponsiveReactGridLayout
 								className="layout"
 								rowHeight={350}
-								width={1385}
+								width={1385} style={{ marginLeft: '20px' }}
 								layouts={this.getFromLS(this.props.name)}
 								onLayoutChange={(layout, layouts) =>
 									this.onLayoutChange(this.props.name, layouts)
@@ -137,7 +138,8 @@ class Shelf extends React.Component {
 }
 
 Shelf.defaultProps = {
-	whenEmpty: 'This shelf is empty'
+	whenEmpty: 'This shelf is empty',
+	inSearch: false,
 }
 
 Shelf.propTypes = {
@@ -145,6 +147,7 @@ Shelf.propTypes = {
 	title: PropTypes.string.isRequired,
 	moveBook: PropTypes.func.isRequired,
 	clearShelf: PropTypes.func,
+	inSearch: PropTypes.bool,
 }
 
 export default Shelf

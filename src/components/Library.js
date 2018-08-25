@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import OpenBookIcon from '@material-ui/icons/ImportContacts'
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
-
-// import BookmarksIcon from '@material-ui/icons/Bookmarks'
+import ScheduleIcon from '@material-ui/icons/Schedule'
+import DoneIcon from '@material-ui/icons/Done'
+import DoneAllIcon from '@material-ui/icons/DoneAll'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -17,6 +17,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Shelf from './Shelf'
 
 const Library = (props) => {
+	let iconStyle = { fontSize: 15, marginLeft: '5px' }
 
 	return (
 		<div>
@@ -28,14 +29,11 @@ const Library = (props) => {
 				</Toolbar>
 			</AppBar>
 
-			<Typography variant="title" color="inherit" style={{ marginLeft: '20px', marginRight: '20px', marginBottom: '20px' }}>
-				My Library <LibraryBooksIcon />
-			</Typography>
-
 			<Shelf
 				name="wantToRead" className="br"
 				books={props.state.wantToRead}
 				title={'Want To Read'}
+				icon={<ScheduleIcon style={iconStyle} />}
 				moveBook={props.moveBook}
 				whichShelf={props.whichShelf}
 				clearShelf={props.clearShelf} />
@@ -44,6 +42,7 @@ const Library = (props) => {
 				name="currentlyReading" className="br"
 				books={props.state.currentlyReading}
 				title={'Currently Reading'}
+				icon={<DoneIcon style={iconStyle} />}
 				moveBook={props.moveBook}
 				whichShelf={props.whichShelf}
 				clearShelf={props.clearShelf} />
@@ -52,6 +51,7 @@ const Library = (props) => {
 				name="read"
 				books={props.state.read}
 				title={'Read'}
+				icon={<DoneAllIcon style={iconStyle} />}
 				moveBook={props.moveBook}
 				whichShelf={props.whichShelf}
 				clearShelf={props.clearShelf} />

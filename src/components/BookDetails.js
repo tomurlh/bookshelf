@@ -58,7 +58,7 @@ class BookDetails extends React.Component {
 								<div style={{ marginLeft: '5px' }}>
 									<center>
 									{ this.state.book.imageLinks
-										? <img src={book.imageLinks.smallThumbnail} alt="not available" width="90%" height="90%"/>
+										? <img src={book.imageLinks.thumbnail} alt="not available" width="90%" height="90%"/>
 										: <img src="#" alt="not available" width="90%" height="90%"/>
 									}
 									</center>

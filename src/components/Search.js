@@ -27,8 +27,8 @@ class Search extends React.Component {
 				<div style={{ marginTop: '80px', width: '100%' }}>
 					<Shelf
 						name="queriedBooks"
-						books={this.state.books}
 						title={'Queried Books'}
+						books={this.state.books} inSearch={true}
 						whichShelf={this.props.whichShelf}
 						whenEmpty="Perform a search to fetch books"
 						moveBook={this.props.moveBook} />

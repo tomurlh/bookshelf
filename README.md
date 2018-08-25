@@ -41,11 +41,12 @@ by hovering the mouse over the book you can see the actions that can move it bet
 
 ## Workflow
 
-This app is pretty simple and have just 4 components besides de App:
+This app is pretty simple and have just 5 components besides de App:
 
 - Library => container that keeps all your shelves;
 - Shelf => component that group your books by some criteria (Want To Read, Currently Reading or Reading is the default options);
 - Book => the book itself;
+- BookDetails => modal with book details;
 - Search => component that search for new books to add to your library;
 
 

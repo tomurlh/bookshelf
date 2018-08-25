@@ -120,3 +120,14 @@
   filter: FlipH;
   -ms-filter: "FlipH";
 }
+
+.shelf-title {
+  font-size: 18px;
+}
+
+.shelf-title-icon {
+  font-size: 20px;
+  vertical-align: 'middle';
+  margin-top: -20px !important;
+  margin-left: 5px;
+}

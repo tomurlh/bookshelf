@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const DETAILED_BOOK = gql`
 	query {
 		data(id: $id)
-		@rest(type: "DetailedBook", path: "/books/:id", method: "GET") {
+		@rest(type: "DetailedBook", path: "/books/{args.id}", method: "GET") {
 			book @type(name: "Book") {
 				id
 				shelf
@@ -38,7 +38,7 @@ export const GET_ALL = gql`
 export const MOVE_BOOK = gql`
 	mutation {
 		data(id: $id, input: $input)
-		@rest(type: "Update", path: "/books/:id", method: "PUT") {
+		@rest(type: "Update", path: "/books/{args.id}", method: "PUT") {
 			books @type(name: "Book") {
 				id
 				shelf

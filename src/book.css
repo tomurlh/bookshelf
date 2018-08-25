@@ -117,7 +117,40 @@ Table of Contents
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+	-webkit-animation-duration: 1s;animation-duration: 1s;
+	-webkit-animation-fill-mode: both;animation-fill-mode: both;
 }
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeIn {
+  100% {opacity: 1;}
+  0% {opacity: 0;}
+}
+
+@keyframes fadeIn {
+  100% {opacity: 1;}
+  0% {opacity: 0;}
+}
+
 
 /*
 	2. background & color
@@ -703,3 +736,6 @@ figcaption p {
 		font-size: 90%;
 	}
 }
+
+
+
