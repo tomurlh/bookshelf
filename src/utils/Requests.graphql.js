@@ -1,5 +1,26 @@
 import gql from 'graphql-tag'
 
+export const DETAILED_BOOK = gql`
+	query {
+		data(id: $id)
+		@rest(type: "DetailedBook", path: "/books/:id", method: "GET") {
+			book @type(name: "Book") {
+				id
+				shelf
+				title
+				authors
+				imageLinks
+				averageRating
+				publisher
+				publishedDate(formatString: "DD/MM/YYYY")
+				description
+				language
+				previewLink
+			}
+		}
+	}
+`
+
 export const GET_ALL = gql`
 	query {
 		data @rest(type: "Books", path: "/books") {

@@ -21,7 +21,7 @@ const authLink = setContext((_, { headers }) => {
 	}
 });
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
 	link: authLink.concat(
 		new RestLink({
 		uri: 'https://reactnd-books-api.udacity.com',

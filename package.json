@@ -2,7 +2,7 @@
   "name": "bookshelf",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tomurlh.github.io/my-reads",
+  "homepage": "https://tomurlh.github.io/my-reads/",
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
@@ -20,6 +20,7 @@
     "react-grid-layout": "^0.16.6",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-star-rating-component": "^1.4.1",
     "sweetalert2": "^7.26.10"
   },
   "scripts": {

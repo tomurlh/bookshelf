@@ -45,28 +45,28 @@ class Search extends React.Component {
 			return
 		}
 
-	this.props.searchBooks({
-        variables: { input: { query } }
-  	}).then((response) => {
-		if(response.error) {
-			this.setState({ books: [] })
+		this.props.searchBooks({
+	        variables: { input: { query } }
+	  	}).then((response) => {
+			if(response.error) {
+				this.setState({ books: [] })
+				// Alert message
+				const toast = swal.mixin({
+					toast: true, position: 'top-end',
+					showConfirmButton: false, timer: 3000
+				})
+				toast({ type: 'error', title: 'the search did not match any books' })
+
+				return
+			}
+			this.setState({ books: response.data.data.books })
 			// Alert message
 			const toast = swal.mixin({
 				toast: true, position: 'top-end',
 				showConfirmButton: false, timer: 3000
 			})
-			toast({ type: 'error', title: 'the search did not match any books' })
-
-			return
-		}
-		this.setState({ books: response.data.data.books })
-		// Alert message
-		const toast = swal.mixin({
-			toast: true, position: 'top-end',
-			showConfirmButton: false, timer: 3000
-		})
-		toast({ type: 'success', title: 'Research completed' })
-	})}, 500)
+			toast({ type: 'success', title: 'Research completed' })
+		})}, 500)
 }
 
 export default graphql(SEARCH_BOOKS, { name: 'searchBooks' })(Search)

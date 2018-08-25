@@ -71,7 +71,7 @@ const Shelf = (props) => {
 							{props.clearShelf !== undefined &&
 								<span className="shelf-action">
 									<Button
-										variant="contained" color="primary" size="small"
+										variant="contained" style={{ color: 'white', backgroundColor: '#D32F2F' }} size="small"
 										className="small-font clear-shelf-btn"
 										onClick={() => {props.clearShelf(props.name)}}>
 										Clear Shelf <RemoveCircleIcon style={{ fontSize: 15, verticalAlign: 'middle' }} />

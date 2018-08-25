@@ -7,6 +7,7 @@ import Search from './components/Search'
 import Library from './components/Library'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+
 class App extends Component {
 	// the state is shared through the workflow: App -> Library -> Shelf -> Book
 	state = {
@@ -102,6 +103,7 @@ class App extends Component {
 							state={this.state}
 							moveBook={this.moveBook}
 							whichShelf={this.whichShelf}
+							bookDetails={this.handleClickOpen}
 							clearShelf={this.clearShelf} />
 					)} />
 
