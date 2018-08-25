@@ -74,14 +74,7 @@
   padding: 4px 8px !important;
 }
 
-.shelf-first-action {
-  position: relative !important;
-  float: right;
-  margin-top: -17px;
-  margin-left: -120px;
-}
-
-.shelf-second-action {
+.shelf-actions {
   float: right;
   margin-top: -17px;
   margin-left: -120px;

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import '../defaults.css'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
@@ -9,6 +8,7 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
+import ClearAllIcon from '@material-ui/icons/ClearAll'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline'
 import Typography from '@material-ui/core/Typography'
 import Book from './Book'
@@ -28,24 +28,14 @@ class Shelf extends React.Component {
 
 	getFromLS = (layoutName) => {
 		let ls = {}
-		if (global.localStorage) {
-			try {
-				ls = JSON.parse(global.localStorage.getItem('read')) || {};
-			} catch (e) {
-			/*Ignore*/
-			}
-		}
+		ls = JSON.parse(global.localStorage.getItem(layoutName)) || {}
 		return ls[layoutName];
 	}
 
 	saveToLS = (shelfName, value) => {
-		if (global.localStorage) {
-			global.localStorage.setItem(
-				'read',
-				JSON.stringify({
-					[shelfName]: value
-				})
-			);
+		let lsLayout = JSON.parse(global.localStorage.getItem(shelfName)) || {}
+		if(JSON.stringify(lsLayout[shelfName]) !== JSON.stringify(value)) {
+			global.localStorage.setItem(shelfName, JSON.stringify({ [shelfName]: value }))
 		}
 	}
 
@@ -60,8 +50,7 @@ class Shelf extends React.Component {
 		if(this.props.books.length > 0) {
 			return this.props.books.map((book, i) => {
 				// The next two lines are responsible to generate the default layout
-				const y = _.result(this.props, 'y') ||Math.ceil(Math.random() * 4) + 1
-				let layout = {x: (i * 2) % 12, y: Math.floor(i / 2) * y, w: 2, h: 1}
+				let layout = {x: (i * 2) % 12, y: Math.floor(i / 2), w: 2, h: 1}
 			 	return <div key={book.id} data-grid={layout}>
 					<Book
 						cover={book.imageLinks} id={book.id} title={book.title}
@@ -76,7 +65,8 @@ class Shelf extends React.Component {
 
 
 	render() {
-		let shelfActionStyle = { color: 'white', backgroundColor: '#D32F2F' }
+		let shelfActionStyle = { color: 'white', backgroundColor: '#F57C00' }
+		let shelfLastActionStyle = { color: 'white', backgroundColor: '#D32F2F' }
 		let shelfActionIconStyle = { fontSize: 15, verticalAlign: 'middle' }
 		return (
 			<div>
@@ -92,22 +82,25 @@ class Shelf extends React.Component {
 									</Typography>
 								</Grid>
 
-								<Grid item xs={5}></Grid>
+								<Grid item xs={7}></Grid>
 
 								<Grid item xs={2}>
-								</Grid>
-
-								<Grid item xs={2}>
+									<span className="shelf-actions">
+										<Button
+											variant="contained" style={shelfActionStyle} size="small"
+											className="small-font shelf-btn"
+											onClick={() => {this.resetLayout(this.props.name)}}>
+											Reorganize <ClearAllIcon style={shelfActionIconStyle} />
+										</Button>
 									{this.props.clearShelf !== undefined &&
-										<span className="shelf-second-action">
-											<Button
-												variant="contained" style={shelfActionStyle} size="small"
-												className="small-font last-shelf-btn"
-												onClick={() => {this.props.clearShelf(this.props.name)}}>
-												Clear Shelf <RemoveCircleIcon style={shelfActionIconStyle} />
-											</Button>
-										</span>
+										<Button
+											variant="contained" style={shelfLastActionStyle} size="small"
+											className="small-font last-shelf-btn"
+											onClick={() => {this.props.clearShelf(this.props.name)}}>
+											Clear Shelf <RemoveCircleIcon style={shelfActionIconStyle} />
+										</Button>
 									}
+									</span>
 								</Grid>
 							</Grid>
 							<Divider style={{ marginBottom: '10px' }} />
