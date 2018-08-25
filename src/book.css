@@ -17,6 +17,7 @@ html,
 body {
 	height: 100%;
 	-webkit-font-smoothing: subpixel-antialiased;
+    overflow:auto;
 }
 
 html {

@@ -5,106 +5,142 @@ import '../defaults.css'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
-import GridLayout from 'react-grid-layout'
-import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline'
 import Typography from '@material-ui/core/Typography'
-
 import Book from './Book'
+import { WidthProvider, Responsive } from "react-grid-layout"
 
-const Shelf = (props) => {
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-	// Methods that generate the layout of the Grid, accoding to number of books of the shelf
-	const generateLayout = (books) => {
-		const p = props
-		if(books.length > 0) {
-			return books.map((book, i) => {
-				const y = _.result(p, 'y') ||Math.ceil(Math.random() * 4) + 1
-				return {
-					i: book.id,
-					x: (i * 2) % 12,
-					y: Math.floor(i / 2) * y,
-					w: 2,
-					h: 1
-				}
-			})
+class Shelf extends React.Component {
+	state = {
+		layouts: JSON.parse(global.localStorage.getItem(this.props.name)) || {}
+	};
+
+	onLayoutChange = (shelf, layouts) => {
+		this.saveToLS(shelf, layouts);
+		this.setState({ layouts });
+	}
+
+	getFromLS = (layoutName) => {
+		let ls = {}
+		if (global.localStorage) {
+			try {
+				ls = JSON.parse(global.localStorage.getItem('read')) || {};
+			} catch (e) {
+			/*Ignore*/
+			}
 		}
-		else {
-			return [
-				{i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
-				{i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-				{i: 'c', x: 4, y: 0, w: 1, h: 2}
-			]
+		return ls[layoutName];
+	}
+
+	saveToLS = (shelfName, value) => {
+		if (global.localStorage) {
+			global.localStorage.setItem(
+				'read',
+				JSON.stringify({
+					[shelfName]: value
+				})
+			);
 		}
+	}
+
+	resetLayout = (shelfName) => {
+		global.localStorage.removeItem(shelfName)
+		this.setState({ layouts: {} })
 	}
 
 
 
-	const renderContent = () => {
-		if(props.books.length > 0) {
-			return props.books.map((book) =>
-			 	<div key={book.id}>
+	renderContent = () => {
+		if(this.props.books.length > 0) {
+			return this.props.books.map((book, i) => {
+				// The next two lines are responsible to generate the default layout
+				const y = _.result(this.props, 'y') ||Math.ceil(Math.random() * 4) + 1
+				let layout = {x: (i * 2) % 12, y: Math.floor(i / 2) * y, w: 2, h: 1}
+			 	return <div key={book.id} data-grid={layout}>
 					<Book
 						cover={book.imageLinks} id={book.id} title={book.title}
-						authors={book.authors} whichShelf={props.whichShelf}
+						authors={book.authors} whichShelf={this.props.whichShelf}
 						shelf={book.shelf}
-						moveBook={props.moveBook} description={book.description} />
+						moveBook={this.props.moveBook} description={book.description} />
 				</div>
+			}
 			)
 		}
 	}
 
 
+	render() {
+		let shelfActionStyle = { color: 'white', backgroundColor: '#D32F2F' }
+		let shelfActionIconStyle = { fontSize: 15, verticalAlign: 'middle' }
+		return (
+			<div>
+				<Paper className="paper-adjust" style={{ marginBottom: '20px' }}>
+					<Grid container spacing={24}>
+						<Grid item xs={12} className="grid-adjust">
+							<Grid container spacing={8}>
+								<Grid item xs={3}>
+									<Typography>
+										<span color="inherit" className="shelf-title-adjust">
+											{this.props.title}
+										</span>
+									</Typography>
+								</Grid>
 
-	return (
-		<div>
-			<Paper className="paper-adjust" style={{ marginBottom: '20px' }}>
-				<Grid container spacing={24}>
-					<Grid item xs={12} className="grid-adjust">
-						<Typography>
-							<span color="inherit" className="shelf-title-adjust">
-								{props.title}
-							</span>
-							{props.clearShelf !== undefined &&
-								<span className="shelf-action">
-									<Button
-										variant="contained" style={{ color: 'white', backgroundColor: '#D32F2F' }} size="small"
-										className="small-font clear-shelf-btn"
-										onClick={() => {props.clearShelf(props.name)}}>
-										Clear Shelf <RemoveCircleIcon style={{ fontSize: 15, verticalAlign: 'middle' }} />
-									</Button>
-								</span>
+								<Grid item xs={5}></Grid>
+
+								<Grid item xs={2}>
+								</Grid>
+
+								<Grid item xs={2}>
+									{this.props.clearShelf !== undefined &&
+										<span className="shelf-second-action">
+											<Button
+												variant="contained" style={shelfActionStyle} size="small"
+												className="small-font last-shelf-btn"
+												onClick={() => {this.props.clearShelf(this.props.name)}}>
+												Clear Shelf <RemoveCircleIcon style={shelfActionIconStyle} />
+											</Button>
+										</span>
+									}
+								</Grid>
+							</Grid>
+							<Divider style={{ marginBottom: '10px' }} />
+
+							<ResponsiveReactGridLayout
+								className="layout"
+								rowHeight={350}
+								width={1385}
+								layouts={this.getFromLS(this.props.name)}
+								onLayoutChange={(layout, layouts) =>
+									this.onLayoutChange(this.props.name, layouts)
+								}
+								breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+								cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}
+								isResizable={false}>
+								{this.renderContent()}
+							</ResponsiveReactGridLayout>
+							{this.props.books.length <= 0 &&
+								<Typography variant="caption" gutterBottom align="center">
+									{this.props.whenEmpty}
+								</Typography>
 							}
-						</Typography>
-						<Divider style={{ marginBottom: '10px' }} />
-
-						<GridLayout
-							className="layout"
-							cols={12}
-							rowHeight={350}
-							width={1385}
-							layout={generateLayout(props.books)}
-							isResizable={false}>
-							{renderContent()}
-						</GridLayout>
-						{props.books.length <= 0 &&
-							<Typography variant="caption" gutterBottom align="center">
-								{props.whenEmpty}
-							</Typography>
-						}
-						{props.books.length > 0 &&
-							<Typography variant="caption" gutterBottom align="center">
-								This shelf has {props.books.length} book(s)
-							</Typography>
-						}
+							{this.props.books.length > 0 &&
+								<Typography variant="caption" gutterBottom align="center">
+									This shelf has {this.props.books.length} book(s)
+								</Typography>
+							}
+						</Grid>
 					</Grid>
-				</Grid>
-			</Paper>
-		</div>
-	)
+				</Paper>
+			</div>
+		)
+	}
 }
 
 Shelf.defaultProps = {
@@ -113,7 +149,6 @@ Shelf.defaultProps = {
 
 Shelf.propTypes = {
 	name: PropTypes.string,
-	books: PropTypes.array.isRequired,
 	title: PropTypes.string.isRequired,
 	moveBook: PropTypes.func.isRequired,
 	clearShelf: PropTypes.func,

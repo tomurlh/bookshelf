@@ -28,7 +28,7 @@
 }
 
 body {
-  background-size: 100px !important;
-  background-image: url('./images/wallpaper4.jpg') !important;
+  background-size: cover !important;
+  background-image: url('./images/wallpaper5.jpg') !important;
   background-attachment: fixed !important;
 }

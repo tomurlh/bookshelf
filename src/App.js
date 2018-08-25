@@ -122,10 +122,12 @@ class App extends Component {
 		if(!newProps.getAll.loading) {
 			this.props.getAll.refetch()
 			.then((response) => {
+				let books = newProps.getAll.data.books
+				let filterByShelf = (books, shelf) => books.filter((b) => b.shelf === shelf)
 				this.setState({
-					wantToRead: newProps.getAll.data.books.filter((book) => book.shelf === 'wantToRead'),
-					currentlyReading: newProps.getAll.data.books.filter((book) => book.shelf === 'currentlyReading'),
-					read: newProps.getAll.data.books.filter((book) => book.shelf === 'read'),
+					wantToRead: filterByShelf(books, 'wantToRead'),
+					currentlyReading: filterByShelf(books, 'currentlyReading'),
+					read: filterByShelf(books, 'read'),
 				})
 			})
 		}

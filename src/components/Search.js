@@ -24,7 +24,7 @@ class Search extends React.Component {
 							onChange={e => this.queryBooks(e.target.value)} />
 					</div>
 				</div>
-				<div style={{ position: 'fixed', marginTop: '80px', width: '100%' }}>
+				<div style={{ marginTop: '80px', width: '100%' }}>
 					<Shelf
 						name="queriedBooks"
 						books={this.state.books}
